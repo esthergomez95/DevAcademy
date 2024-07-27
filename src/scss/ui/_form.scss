@@ -1,0 +1,15 @@
+@use '../base/mixins' as m;
+@use '../base/variables' as v;
+
+.form{
+  display: flex;
+  flex-direction: column;
+
+    &__field{
+        display: flex;
+        flex-direction: column;
+        gap: 1.3rem;
+    }
+
+
+}
