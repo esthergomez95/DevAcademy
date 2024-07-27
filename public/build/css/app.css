@@ -312,7 +312,7 @@ html {
 }
 
 body {
-  font-family: "Roboto", sans-serif;
+  font-family: "Titillium Web", sans-serif;
   font-size: 1.8rem;
 }
 
@@ -326,7 +326,7 @@ img {
 }
 
 h1, h2, h3 {
-  font-family: "Roboto", sans-serif;
+  font-family: "Titillium Web", sans-serif;
   font-weight: 900;
   margin: 2rem 0;
 }
@@ -348,7 +348,7 @@ h3 {
 }
 
 [class$=__heading] {
-  font-family: "Roboto", sans-serif;
+  font-family: "Titillium Web", sans-serif;
   font-weight: 900;
   margin: 2rem 0;
   margin: 6rem 0 3rem 0;
@@ -371,6 +371,41 @@ h3 {
 .form__field {
   display: flex;
   flex-direction: column;
+  margin: 1.5rem 0;
   gap: 1.3rem;
+}
+.form__label {
+  display: block;
+  font-size: 2rem;
+  color: #231f1f;
+}
+.form__input {
+  padding: 1rem;
+  font-size: 1.8rem;
+  border: 2px solid #1D3557;
+  border-radius: 0.75rem;
+}
+.form__submit {
+  background: #A8DADC;
+  color: 900;
+  display: inline-block;
+  padding: 12px 24px;
+  border: 1px solid #84cbcd;
+  border-radius: 4px;
+  transition: background-color 0.3s ease-in, transform 0.3s ease-in, box-shadow 0.3s ease-in;
+  font-size: 19px;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  width: 50%;
+  align-self: center;
+}
+.form__submit:hover {
+  background-color: #43a4a8;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+}
+.form__submit:active {
+  transform: translateY(0);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 /*# sourceMappingURL=app.css.map */
