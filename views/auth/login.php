@@ -15,9 +15,9 @@
         </div>
         <input class="form__submit" value="Iniciar Sesión" type="submit">
 
-        <div class="options">
-            <a href="register.php" class="options_link">Crear una cuenta nueva</a>
-            <a href="forget.php" class="options_link">Olvidé mi contraseña</a>
+        <div class="auth-links">
+            <a href="/register" class="auth-links__link">Crear una cuenta nueva</a>
+            <a href="/forget" class="auth-links__link">Olvidé mi contraseña</a>
         </div>
     </form>
 

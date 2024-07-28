@@ -1,0 +1,46 @@
+@use '../../base/mixins' as m;
+@use '../../base/variables' as v;
+
+.header {
+  padding: 20px 0;
+  background: linear-gradient(45deg, v.$blue-dark, v.$blue);
+
+  &__container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+  }
+
+  &__logo img {
+    height: 50px;
+  }
+
+  &__nav {
+    display: flex;
+    gap: 20px;
+
+    a {
+      color: #ffffff;
+      text-decoration: none;
+      font-size: 18px;
+      padding: 10px 15px;
+      transition: background-color 0.3s ease, color 0.1s ease;
+
+      &:hover,
+      &.active {
+        background-color: v.$blue-light;
+        color: #282c34;
+        border-radius: 5px;
+      }
+    }
+  }
+}
+
+
+
+
+
+

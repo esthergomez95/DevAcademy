@@ -60,7 +60,7 @@ class AuthController {
        
     }
 
-    public static function signIn(Router $router) {
+    public static function register(Router $router) {
         $alerts = [];
         $user = new User;
 
@@ -71,9 +71,9 @@ class AuthController {
             $alerts = $user->validateAccount();
 
             if(empty($alerts)) {
-                $existeUser = User::where('email', $user->email);
+                $userExist = User::where('email', $user->email);
 
-                if($existeUser) {
+                if($userExist) {
                     User::setAlert('error', 'El User ya esta registrado');
                     $alerts = User::getAlert();
                 } else {
