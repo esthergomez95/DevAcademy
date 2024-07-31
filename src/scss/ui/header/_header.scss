@@ -2,39 +2,96 @@
 @use '../../base/variables' as v;
 
 .header {
-  padding: 20px 0;
-  background: linear-gradient(45deg, v.$blue-dark, v.$blue);
+    &__container {
+      display: flex;
+      flex-direction: column;
+    }
+}
 
+
+.head {
   &__container {
-    max-width: 1200px;
-    margin: 0 auto;
+    background: linear-gradient(to top, rgba(0, 0, 139, 0.5), rgba(0, 0, 255, 0.1)), url("/build/img/header.jpg") no-repeat center center;
+    background-size: cover;
+    width: 100%;
+    height: 400px;
     display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 20px;
+    padding: 20px;
+    position: relative
   }
 
-  &__logo img {
-    height: 50px;
+  &__title {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: #f6f1f1;
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%)
+  }
+
+  &__title h1, h2 {
+    margin: 2rem;
+    font-weight: 600;
   }
 
   &__nav {
     display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
     gap: 20px;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+  }
 
-    a {
-      color: #ffffff;
-      text-decoration: none;
-      font-size: 18px;
-      padding: 10px 15px;
-      transition: background-color 0.3s ease, color 0.1s ease;
+  &__nav a {
+    color: white;
+    text-decoration: none;
+    font-size: 1em;
+  }
 
-      &:hover,
-      &.active {
-        background-color: v.$blue-light;
-        color: #282c34;
-        border-radius: 5px;
-      }
+  &__nav a:hover {
+    color: #ffcc00;
+    transform: scale(1.1);
+  }
+}
+
+  .nav{
+    padding: 10px 0;
+    background: linear-gradient(45deg, v.$blue-dark, v.$blue);
+
+    &__container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      padding: 0 10px;
+    }
+
+    &__logo img {
+      height: 40px;
+    }
+
+    &__nav {
+      display: flex;
+      gap: 20px;
+
+      a {
+        color: #ffffff;
+        text-decoration: none;
+        font-size: 15px;
+        padding: 10px 15px;
+        transition: background-color 0.3s ease, color 0.1s ease;
+
+        &:hover,
+        &.active {
+          background-color: v.$blue-light;
+          color: #282c34;
+          border-radius: 5px;
+        }
     }
   }
 }

@@ -31,6 +31,7 @@
     "terser": "^5.14.2"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-free": "^6.6.0",
     "sweetalert2": "^11.4.31",
     "swiper": "^8.3.2",
     "webpack-stream": "^7.0.0"
