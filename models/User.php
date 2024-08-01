@@ -50,24 +50,25 @@ class User extends ActiveRecord {
 
     // Validación para cuentas nuevas
     public function validateAccount() {
-        if(!$this->name) {
-            self::$alerts['error'][] = 'El Nombre es Obligatorio';
+        if (empty($this->name)) {
+            self::$alerts['error'][] = 'El nombre es obligatorio.';
         }
-        if(!$this->surname) {
-            self::$alerts['error'][] = 'El Apellido es Obligatorio';
+        if (empty($this->surname)) {
+            self::$alerts['error'][] = 'Los apellidos son obligatorios.';
         }
-        if(!$this->email) {
-            self::$alerts['error'][] = 'El Email es Obligatorio';
+        if (empty($this->email)) {
+            self::$alerts['error'][] = 'El correo electrónico es obligatorio.';
         }
-        if(!$this->password) {
-            self::$alerts['error'][] = 'El Password no puede ir vacio';
+        if (empty($this->password)) {
+            self::$alerts['error'][] = 'La contraseña no puede estar vacía.';
         }
-        if(strlen($this->password) < 6) {
-            self::$alerts['error'][] = 'El password debe contener al menos 6 caracteres';
+        if (strlen($this->password) < 6) {
+            self::$alerts['error'][] = 'La contraseña debe tener al menos 6 caracteres.';
         }
-        if($this->password !== $this->password2) {
-            self::$alerts['error'][] = 'Los password son diferentes';
+        if ($this->password !== $this->password2) {
+            self::$alerts['error'][] = 'Las contraseñas no coinciden.';
         }
+
         return self::$alerts;
     }
 

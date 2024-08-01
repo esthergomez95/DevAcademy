@@ -88,11 +88,18 @@ class ActiveRecord {
     }
 
     // Sincroniza BD con Objetos en memoria
-    public function synchronize($args=[]) { 
-        foreach($args as $key => $value) {
-          if(property_exists($this, $key) && !is_null($value)) {
-            $this->$key = $value;
-          }
+    public function synchronize($args = []) {
+        foreach ($args as $key => $value) {
+            if (property_exists($this, $key)) {
+                // Limpia los espacios en blanco
+                $cleanValue = trim($value);
+
+                if ($key === 'email') {
+                    $cleanValue = strtolower($cleanValue);
+                }
+
+                $this->$key = $cleanValue;
+            }
         }
     }
 

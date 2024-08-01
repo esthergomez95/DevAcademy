@@ -34,7 +34,7 @@ class AuthController {
                         $_SESSION['surname'] = $user->surname;
                         $_SESSION['email'] = $user->email;
                         $_SESSION['admin'] = $user->admin ?? null;
-                        
+
                     } else {
                         User::setAlert('error', 'Incorrect password');
                     }
@@ -104,7 +104,7 @@ class AuthController {
         // Render a la vista
         $router->render('auth/register', [
             'title' => 'Crea tu cuenta en DevWebcamp',
-            'user' => $user, 
+            'user' => $user,
             'alerts' => $alerts
         ]);
     }
