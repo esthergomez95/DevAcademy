@@ -1,3 +1,4 @@
+@charset "UTF-8";
 html {
   line-height: 1.15; /* 1 */
   -webkit-text-size-adjust: 100%; /* 2 */
@@ -580,5 +581,44 @@ h3 {
 .footer .social-networks__item--linkedin:hover {
   background: #2b7cbe;
   color: #fff;
+}
+
+.alert {
+  padding: 13px;
+  border-radius: 5px;
+  margin: 10px 0;
+  color: #fff;
+  position: relative;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+.alert--error {
+  background: linear-gradient(135deg, #ff6b6b, #d32f2f);
+  box-shadow: 0 4px 6px rgba(255, 107, 107, 0.5);
+}
+.alert--success {
+  background: linear-gradient(135deg, #81c784, #388e3c);
+  box-shadow: 0 4px 6px rgba(129, 199, 132, 0.5);
+}
+.alert::before {
+  content: "×";
+  position: absolute;
+  top: 50%;
+  right: 15px;
+  transform: translateY(-50%);
+  font-size: 20px;
+  cursor: pointer;
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+.alert.show {
+  transform: translateY(0);
+  opacity: 1;
+}
+.alert.hide {
+  transform: translateY(-20px);
+  opacity: 0;
+}
+.alert:hover::before {
+  transform: scale(1.2) translateY(-50%);
+  color: #ffeb3b;
 }
 /*# sourceMappingURL=app.css.map */
