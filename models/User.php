@@ -4,9 +4,10 @@ namespace Model;
 
 class User extends ActiveRecord {
     protected static $table = 'users';
-    protected static $columnsDB = ['id', 'name', 'surname', 'email', 'password', 'confirmed', 'token', 'admin'];
+    protected static $columnsDB = ['id', 'created', 'name', 'surname', 'email', 'password', 'confirmed', 'token', 'admin'];
 
     public $id;
+    public $created;
     public $name;
     public $surname;
     public $email;
@@ -23,6 +24,7 @@ class User extends ActiveRecord {
     public function __construct($args = [])
     {
         $this->id = $args['id'] ?? null;
+        $this->created = $args['created'] ?? date('Y/m/d H:i:s');
         $this->name = $args['name'] ?? '';
         $this->surname = $args['surname'] ?? '';
         $this->email = $args['email'] ?? '';

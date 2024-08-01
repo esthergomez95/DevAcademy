@@ -218,23 +218,20 @@ class AuthController {
         $token = s($_GET['token']);
 
         if(!$token) header('Location: /');
-
-        // Encontrar al user con este token
         $user = User::where('token', $token);
 
         if(empty($user)) {
-            // No se encontró un user con ese token
-            User::setAlert('error', 'Token No Válido');
+            User::setAlert('error', 'Token no válido, la cuenta no ha sido confirmada');
         } else {
-            // Confirmar la cuenta
+
+            // Confirm account
             $user->confirmed = 1;
             $user->token = '';
             unset($user->password2);
-            
-            // Guardar en la BD
+
             $user->save();
 
-            User::setAlert('success', 'Cuenta Comprobada Correctamente');
+            User::setAlert('success', 'Su cuenta ha sido confirmada con exito');
         }
 
      
