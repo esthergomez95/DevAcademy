@@ -234,7 +234,7 @@ class AuthController {
             // Guardar en la BD
             $user->save();
 
-            User::setAlert('exito', 'Cuenta Comprobada Correctamente');
+            User::setAlert('success', 'Cuenta Comprobada Correctamente');
         }
 
      
