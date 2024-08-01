@@ -3,8 +3,11 @@
     <h2 class="auth__heading"><?php echo $title  ?></h2>
     <p class="auth__text">Recupera tu contraseña</p>
 
+            <?php
+            require_once __DIR__ . '/../templates/alerts.php';
+            ?>
 
-    <form class="form">
+    <form method="POST" action="/forget" class="form">
         <div class="form__field">
             <label class="form__label" for="email">Correo Electrónico</label>
             <input class="form__input" type="email" placeholder="Introduce tu email" id="email" name="email">
@@ -16,6 +19,5 @@
             <a href="/register" class="auth-links__link">Crear cuenta nueva</a>
         </div>
     </form>
-
 
 </main>

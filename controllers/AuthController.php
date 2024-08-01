@@ -35,6 +35,14 @@ class AuthController {
                         $_SESSION['email'] = $user->email;
                         $_SESSION['admin'] = $user->admin ?? null;
 
+                        if($user->admin) {
+                            header('Location: /admin/dashboard');
+                        }
+                        else {
+                            header('Location: /finish-registration');
+                        }
+
+
                     } else {
                         User::setAlert('error', 'Incorrect password');
                     }
@@ -117,37 +125,25 @@ class AuthController {
             $alerts = $user->validateEmail();
 
             if(empty($alerts)) {
-                // Buscar el user
                 $user = User::where('email', $user->email);
-
                 if($user && $user->confirmed) {
-
-                    // Generar un nuevo token
                     $user->createToken();
                     unset($user->password2);
-
-                    // Actualizar el user
                     $user->save();
-
-                    // Enviar el email
                     $email = new Email( $user->email, $user->name, $user->token );
                     $email->sendInstructions();
-
 
                     // Imprimir la alerta
                     // User::setAlerta('exito', 'Hemos enviado las instrucciones a tu email');
 
-                    $alerts['exito'][] = 'Hemos enviado las instrucciones a tu email';
+                    $alerts['success'][] = 'Siga las instrucciones enviadas a su email';
                 } else {
-                 
                     // User::setAlerta('error', 'El User no existe o no esta confirmed');
-
-                    $alerts['error'][] = 'El User no existe o no esta confirmed';
+                    $alerts['error'][] = 'No hay ningun usuario asociado a este correo';
                 }
             }
         }
 
-        // Muestra la vista
         $router->render('auth/forget', [
             'title' => 'Olvide mi Password',
             'alerts' => $alerts
@@ -155,25 +151,19 @@ class AuthController {
     }
 
     public static function reset(Router $router) {
-
         $token = s($_GET['token']);
-
         $valid_token = true;
-
         if(!$token) header('Location: /');
 
         // Identificar el user con este token
         $user = User::where('token', $token);
 
         if(empty($user)) {
-            User::setAlert('error', 'Token No Válido, intenta de nuevo');
+            User::setAlert('error', 'El token no es valido, intentalo de nuevo');
             $valid_token = false;
         }
 
-
         if($_SERVER['REQUEST_METHOD'] === 'POST') {
-
-            // Añadir el nuevo password
             $user->synchronize($_POST);
 
             // Validar el password

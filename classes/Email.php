@@ -83,11 +83,26 @@ class Email {
         $mail->isHTML(TRUE);
         $mail->CharSet = 'UTF-8';
 
-     $content = '<html>';
-     $content .= "<p><strong>Hola " . $this->name .  "</strong> Has solicitado reestablecer tu password, sigue el siguiente enlace para hacerlo.</p>";
-     $content .= "<p>Presiona aquí: <a href='" . $_ENV['HOST'] . "/recuperar?token=" . $this->token . "'>Reestablecer Password</a>";        
-     $content .= "<p>Si tu no solicitaste este cambio, puedes ignorar el mensaje</p>";
-     $content .= '</html>';
+        $content = '<!DOCTYPE html>';
+        $content .= '<html lang="es">';
+        $content .= '<head>';
+        $content .= '<meta charset="UTF-8">';
+        $content .= '<meta name="viewport" content="width=device-width, initial-scale=1.0">';
+        $content .= '<title>Reestablecimiento de Contraseña</title>';
+        $content .= '<style>';
+        $content .= 'body { font-family: Arial, sans-serif; line-height: 1.6; margin: 0; padding: 20px; }';
+        $content .= 'p { margin: 0 0 10px; }';
+        $content .= 'a { color: #007bff; text-decoration: none; }';
+        $content .= 'a:hover { text-decoration: underline; }';
+        $content .= '</style>';
+        $content .= '</head>';
+        $content .= '<body>';
+        $content .= '<p><strong>Hola ' . htmlspecialchars($this->name, ENT_QUOTES, 'UTF-8') . ',</strong></p>';
+        $content .= '<p>Recibimos una solicitud para cambiar tu contraseña. Por favor, accede al siguiente enlace para completar el proceso:</p>';
+        $content .= '<p><a href="' . htmlspecialchars($_ENV['HOST'], ENT_QUOTES, 'UTF-8') . '/reset?token=' . htmlspecialchars($this->token, ENT_QUOTES, 'UTF-8') . '">Cambiar Contraseña</a></p>';
+        $content .= '<p>Si no hiciste esta solicitud, simplemente ignora este mensaje.</p>';
+        $content .= '</body>';
+        $content .= '</html>';
         $mail->Body = $content;
 
         //Enviar el mail

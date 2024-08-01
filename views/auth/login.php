@@ -3,8 +3,11 @@
     <h2 class="auth__heading"><?php echo $title  ?></h2>
     <p class="auth__text">Iniciar Sesion en DevAcademy</p>
 
+    <?php
+    require_once __DIR__ . '/../templates/alerts.php';
+    ?>
 
-    <form class="form">
+    <form method="post" action="/login" class="form">
         <div class="form__field">
             <label class="form__label" for="email">Correo Electrónico</label>
             <input class="form__input" type="email" placeholder="Introduce tu email" id="email" name="email">
