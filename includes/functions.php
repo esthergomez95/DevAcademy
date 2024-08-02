@@ -13,3 +13,7 @@ function s($html): string
     $s = htmlspecialchars($html);
     return $s;
 }
+
+function current_page($path){
+    return str_contains( $_SERVER['PATH_INFO'], $path);
+}

@@ -6,7 +6,7 @@ use Classes\Email;
 use Model\User;
 use MVC\Router;
 
-class AuthController {
+class authController {
     public static function login(Router $router) {
 
         $alerts = [];
