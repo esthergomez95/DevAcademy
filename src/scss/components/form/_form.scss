@@ -2,10 +2,15 @@
 @use '../../base/variables' as v;
 
 .form{
-  display: flex;
-  flex-direction: column;
+  width: 600px;
+  margin: 30px auto;
+  background: linear-gradient(to bottom, #f1f5f6, #f9f9f9);
+  padding: 20px 10px;
+  box-sizing: border-box;
+  border-radius: 2px;
+  box-shadow: 0 5px 13px rgba(0, 0, 0, 0.4);
 
-    &__field{
+  &__field{
         display: flex;
         flex-direction: column;
         margin:1.5rem 0 ;
@@ -13,21 +18,50 @@
     }
 
     &__label{
-        display: block;
-        font-size: 2rem;
-        color: #231f1f;
+      border: none;
+      outline: none;
+      position: relative;
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
     }
     &__input{
-        padding: 1rem;
-        font-size: 1.8rem;
-        border: 2px solid v.$blue-dark;
-        border-radius:0.75rem;
+      border: none;
+      outline: none;
+      padding: 5px 5px 8px 0px;
+      width: 100%;
+      font-size: 18px;
+      border-bottom: solid 2px #868484;
+      background-color: transparent;
+    }
+    &__input:focus{
+      border-bottom: solid 2px v.$blue-light;
+    }
+
+    &__input::placeholder{
+      color: #ccc2c2;
+    }
+
+    &__list{
+      @include m.tags
     }
 
     &__submit{
         @include m.button(v.$blue-light, v.$black);
-        width: 50%;
-        align-self: center;
+        width: 100%;
+        ;
     }
+    &__fieldset {
+      border: 2px solid #395c80;
+      padding: 25px;
+      margin-bottom: 20px;
+      border-radius: 5px;
+    }
+      &__legend {
+        font-size: 1.2em;
+        font-weight: bold;
+        padding: 0 10px;
+        color: #333;
+      }
 
 }

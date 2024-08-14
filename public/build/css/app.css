@@ -369,8 +369,13 @@ h3 {
 }
 
 .form {
-  display: flex;
-  flex-direction: column;
+  width: 600px;
+  margin: 30px auto;
+  background: linear-gradient(to bottom, #f1f5f6, #f9f9f9);
+  padding: 20px 10px;
+  box-sizing: border-box;
+  border-radius: 2px;
+  box-shadow: 0 5px 13px rgba(0, 0, 0, 0.4);
 }
 .form__field {
   display: flex;
@@ -379,15 +384,38 @@ h3 {
   gap: 1.3rem;
 }
 .form__label {
-  display: block;
-  font-size: 2rem;
-  color: #231f1f;
+  border: none;
+  outline: none;
+  position: relative;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 .form__input {
-  padding: 1rem;
-  font-size: 1.8rem;
-  border: 2px solid #1D3557;
-  border-radius: 0.75rem;
+  border: none;
+  outline: none;
+  padding: 5px 5px 8px 0px;
+  width: 100%;
+  font-size: 18px;
+  border-bottom: solid 2px #868484;
+  background-color: transparent;
+}
+.form__input:focus {
+  border-bottom: solid 2px #A8DADC;
+}
+.form__input::-moz-placeholder {
+  color: #ccc2c2;
+}
+.form__input::placeholder {
+  color: #ccc2c2;
+}
+.form__list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
 }
 .form__submit {
   background: #A8DADC;
@@ -400,8 +428,7 @@ h3 {
   font-size: 19px;
   cursor: pointer;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  width: 50%;
-  align-self: center;
+  width: 100%;
 }
 .form__submit:hover {
   background-color: #43a4a8;
@@ -411,6 +438,18 @@ h3 {
 .form__submit:active {
   transform: translateY(0);
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.form__fieldset {
+  border: 2px solid #395c80;
+  padding: 25px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+}
+.form__legend {
+  font-size: 1.2em;
+  font-weight: bold;
+  padding: 0 10px;
+  color: #333;
 }
 
 .auth-links {
@@ -749,7 +788,27 @@ h3 {
   }
 }
 .dashboard__container {
-  background-color: #ebeef1;
+  background-color: #f5fffa;
   border-radius: 1rem;
+}
+.dashboard__container-button {
+  display: flex;
+  justify-content: flex-end;
+}
+.dashboard__button {
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 18px;
+  background-color: #1D3557;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}
+.dashboard__button:hover {
+  background-color: #4A246D;
+}
+.dashboard__button i {
+  margin-right: 8px;
 }
 /*# sourceMappingURL=app.css.map */

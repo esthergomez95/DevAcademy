@@ -4,6 +4,7 @@ require_once __DIR__ . '/../includes/app.php';
 
 use Controllers\coursesController;
 use Controllers\dashboardController;
+use Controllers\registersController;
 use Controllers\teachersController;
 use MVC\Router;
 use Controllers\authController;
@@ -34,9 +35,11 @@ $router->get('/confirm-account', [authController::class, 'confirm']);
 
 //Administración
 $router->get('/admin/dashboard', [dashboardController::class, 'index']);
+
 $router->get('/admin/teachers', [teachersController::class, 'index']);
+$router->get('/admin/teachers/create', [teachersController::class, 'create']);
 $router->get('/admin/courses', [coursesController::class, 'index']);
-$router->get('/admin/registers', [coursesController::class, 'index']);
+$router->get('/admin/registers', [registersController::class, 'index']);
 
 
 $router->checkRoutes();
