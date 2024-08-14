@@ -95,4 +95,35 @@
     display: flex;
     flex-wrap: wrap;
     gap: 2rem;
+    margin-top: 10px;
+
+    >li{
+        background-color: v.$red;
+        border: 1px solid transparent;
+        border-radius: 0.5rem;
+        padding: 0.5rem 1rem;
+        font-size: 1.5rem;
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        transition: background-color 0.2s, color 0.2s;
+
+        &:hover {
+            background-color: darken(v.$red, 20%);
+            color: v.$black;
+            &::after {
+                color: #666;
+            }
+        }
+
+        &::after {
+            content: '×';
+            display: inline-block;
+            margin-left: 1rem;
+            cursor: pointer;
+            color: #999;
+            transition: color 0.2s;
+        }
+
+    }
 }

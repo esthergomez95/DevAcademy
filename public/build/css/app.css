@@ -416,6 +416,33 @@ h3 {
   display: flex;
   flex-wrap: wrap;
   gap: 2rem;
+  margin-top: 10px;
+}
+.form__list > li {
+  background-color: #ebd8d8;
+  border: 1px solid transparent;
+  border-radius: 0.5rem;
+  padding: 0.5rem 1rem;
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  transition: background-color 0.2s, color 0.2s;
+}
+.form__list > li:hover {
+  background-color: #c89595;
+  color: 900;
+}
+.form__list > li:hover::after {
+  color: #666;
+}
+.form__list > li::after {
+  content: "×";
+  display: inline-block;
+  margin-left: 1rem;
+  cursor: pointer;
+  color: #999;
+  transition: color 0.2s;
 }
 .form__submit {
   background: #A8DADC;
@@ -658,64 +685,6 @@ h3 {
   -webkit-animation: pulse 2s infinite;
           animation: pulse 2s infinite;
 }
-.alert::before {
-  content: "×";
-  position: absolute;
-  top: 50%;
-  right: 15px;
-  transform: translateY(-50%);
-  font-size: 20px;
-  cursor: pointer;
-  transition: transform 0.2s ease, color 0.2s ease;
-}
-.alert--suceess::before {
-  content: "";
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 300%;
-  height: 300%;
-  background: rgba(255, 255, 255, 0.3);
-  border-radius: 50%;
-  transform: translate(-50%, -50%);
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-.alert--success:hover::before {
-  opacity: 1;
-}
-@-webkit-keyframes pulse {
-  0% {
-    transform: scale(1);
-    opacity: 1;
-  }
-  50% {
-    transform: scale(1.05);
-    opacity: 0.8;
-  }
-  100% {
-    transform: scale(1);
-    opacity: 1;
-  }
-}
-@keyframes pulse {
-  0% {
-    transform: scale(1);
-    opacity: 1;
-  }
-  50% {
-    transform: scale(1.05);
-    opacity: 0.8;
-  }
-  100% {
-    transform: scale(1);
-    opacity: 1;
-  }
-}
-.alert:hover::before {
-  transform: scale(1.2) translateY(-50%);
-  color: #ffeb3b;
-}
 
 .dashboard {
   height: 100%;
@@ -747,8 +716,8 @@ h3 {
   cursor: pointer;
 }
 .dashboard__form {
-  display: flex;
-  justify-content: center;
+  max-width: 600px;
+  margin: 0 auto;
 }
 .dashboard__sidebar {
   background-color: #6f6f69;

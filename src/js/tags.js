@@ -1,59 +1,54 @@
-(function() {
+document.addEventListener('DOMContentLoaded', () => {
+    const inputTags = document.querySelector('#tags_input');
+    if (inputTags) {
+        const tagsContainer = document.querySelector('#tags');
+        const hiddenInputTags = document.querySelector('[name="tags"]');
 
-    const tagsInput = document.querySelector('#tags_input');
-    console.log("Hola")
-    if(tagsInput) {
+        let tagList = [];
 
-        const tagsDiv = document.querySelector('#tags');
-        const tagsInputHidden = document.querySelector('[name="tags"]');
-
-        let tags = [];
-
-        // Retrieve from hidden input
-        if(tagsInputHidden.value !== '') {
-            tags = tagsInputHidden.value.split(',');
-            displayTags();
+        // Retrieve values from the hidden input
+        if (hiddenInputTags.value !== '') {
+            tagList = hiddenInputTags.value.split(',');
+            renderTags();
         }
 
         // Listen for changes in the input
-        tagsInput.addEventListener('keypress', saveTag);
+        inputTags.addEventListener('keypress', handleKeyPress);
 
-        function saveTag(e) {
-            if(e.keyCode === 44) {
-                if(e.target.value.trim() === '' || e.target.value.length < 1) {
+        function handleKeyPress(event) {
+            if (event.key === ',') {
+                if (event.target.value.trim() === '' || event.target.value.length < 1) {
                     return;
                 }
-                e.preventDefault();
-                tags = [...tags, e.target.value.trim()];
-                tagsInput.value = '';
-                displayTags();
+                event.preventDefault();
+                tagList = [...tagList, event.target.value.trim()];
+                inputTags.value = '';
+                renderTags();
             }
         }
 
-        function displayTags() {
-            tagsDiv.textContent = '';
-            tags.forEach(tag => {
-                console.log("displauy")
+        function renderTags() {
+            tagsContainer.innerHTML = '';
+            tagList.forEach(tag => {
+                console.log("Displaying tag");
 
-                const tagElement = document.createElement('LI');
-                tagElement.classList.add('form__tag');
-                tagElement.textContent = tag;
-                tagElement.ondblclick = removeTag;
-                tagsDiv.appendChild(tagElement);
+                const listItem = document.createElement('LI');
+                listItem.classList.add('form__tag');
+                listItem.textContent = tag;
+                listItem.onclick = handleTagRemoval;
+                tagsContainer.appendChild(listItem);
             });
             updateHiddenInput();
         }
 
-        function removeTag(e) {
-            e.target.remove();
-            tags = tags.filter(tag => tag !== e.target.textContent);
+        function handleTagRemoval(event) {
+            event.target.remove();
+            tagList = tagList.filter(tag => tag !== event.target.textContent);
             updateHiddenInput();
-
         }
 
         function updateHiddenInput() {
-            tagsInputHidden.value = tags.toString();
+            hiddenInputTags.value = tagList.join(',');
         }
     }
-
-})();
+});

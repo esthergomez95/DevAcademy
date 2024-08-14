@@ -37,8 +37,8 @@
       }
 
     &__form {
-      display: flex;
-      justify-content: center;
+      max-width: 600px;
+      margin: 0 auto;
     }
 
     &__sidebar {
