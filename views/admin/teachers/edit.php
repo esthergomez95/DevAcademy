@@ -9,11 +9,14 @@
 
 <div class = "dashboard__form">
     <?php
-        include_once __DIR__ . '/../../templates/alerts.php';
+    include_once __DIR__ . '/../../templates/alerts.php';
     ?>
-    <form class = "form" method = "POST" enctype = "multipart/form-data" action = "/admin/teachers/create">
+    <form class = "form" method = "POST" enctype = "multipart/form-data">
         <?php include_once __DIR__ . '/form.php' ?>
-        <input type = "submit" value = "Añadir profesor" class = "form__submit form__submit--register">
+
+        <input type = "submit" value = "Editar profesor" class = "form__submit form__submit--register">
     </form>
+
+
 </div>
 

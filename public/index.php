@@ -36,9 +36,12 @@ $router->get('/confirm-account', [authController::class, 'confirm']);
 //Administración
 $router->get('/admin/dashboard', [dashboardController::class, 'index']);
 
-$router->get('/admin/teachers', [teachersController::class, 'index']);
-$router->get('/admin/teachers/create', [teachersController::class, 'create']);
-$router->post('/admin/teachers/create', [teachersController::class, 'create']);
+$router->get('/admin/teacher', [teachersController::class, 'index']);
+$router->get('/admin/teacher/create', [teachersController::class, 'create']);
+$router->post('/admin/teacher/create', [teachersController::class, 'create']);
+$router->post('/admin/teacher/edit', [teachersController::class, 'edit']);
+$router->get('/admin/teacher/edit', [teachersController::class, 'edit']);
+
 
 $router->get('/admin/courses', [coursesController::class, 'index']);
 $router->get('/admin/registers', [registersController::class, 'index']);

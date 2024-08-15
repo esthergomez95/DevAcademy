@@ -10,12 +10,12 @@
     </div>
     <div class="form__field">
         <label for="city" class="form__label">Ciudad</label>
-        <input type="text" class="form__input" id="city" name="city" placeholder="Introduce tu ciudad" value="<?php echo $teacher->ciudad ?? ''; ?>">
+        <input type="text" class="form__input" id="city" name="city" placeholder="Introduce tu ciudad" value="<?php echo $teacher->city ?? ''; ?>">
     </div>
 
     <div class="form__field">
         <label for="country" class="form__label">Pais</label>
-        <input type="text" class="form__input" id="country" name="country" placeholder="Introduce tu pais" value="<?php echo $teacher->pais ?? ''; ?>">
+        <input type="text" class="form__input" id="country" name="country" placeholder="Introduce tu pais" value="<?php echo $teacher->country ?? ''; ?>">
     </div>
 
     <div class="form__field">
@@ -27,9 +27,8 @@
         <p class="form__text">Current Image:</p>
         <div class="form__image">
             <picture>
-                <source srcset="<?php echo $_ENV['HOST'] . '/img/teachers/' . $teacher->image; ?>.webp" type="image/webp">
-                <source srcset="<?php echo $_ENV['HOST'] . '/img/teachers/' . $teacher->image; ?>.png" type="image/png">
-                <img src="<?php echo $_ENV['HOST'] . '/img/teachers/' . $teacher->image; ?>.png" alt="Speaker Image">
+                <source srcset="<?php echo $_ENV['HOST'] . '/img/teacher/' . $teacher->image; ?>.png" type="image/png">
+                <img src="<?php echo $_ENV['HOST'] . 'build/img/teacher/' . $teacher->image; ?>.png" alt="Teacher Image">
             </picture>
         </div>
     <?php } ?>

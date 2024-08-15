@@ -780,4 +780,89 @@ h3 {
 .dashboard__button i {
   margin-right: 8px;
 }
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+  font-size: 16px;
+  text-align: left;
+  background-color: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+.table__thead {
+  background-color: #2a5881;
+  color: #fff;
+}
+.table__thead .table__th {
+  padding: 12px 15px;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+.table__tbody .table__tr:nth-child(odd) {
+  background-color: #f8f9fa;
+}
+.table__tbody .table__tr:nth-child(odd) .table__td {
+  background-color: #f8f9fa;
+}
+.table__tbody .table__tr:nth-child(even) {
+  background-color: #e9ecef;
+}
+.table__tbody .table__tr:nth-child(even) .table__td {
+  background-color: #e9ecef;
+}
+.table__tbody .table__tr:hover {
+  background-color: #dee2e6;
+}
+.table__tbody .table__tr:hover .table__td {
+  background-color: #dee2e6;
+}
+.table__td {
+  padding: 12px 15px;
+  color: #333;
+}
+.table__td--actions {
+  display: flex;
+  gap: 10px;
+}
+.table__td--actions .table__action {
+  text-decoration: none;
+  padding: 8px 12px;
+  border-radius: 4px;
+  font-size: 14px;
+  color: #fff;
+  transition: background-color 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin: 1rem;
+  cursor: pointer;
+}
+.table__td--actions .table__action--edit {
+  background-color: #28a745;
+}
+.table__td--actions .table__action--edit:hover {
+  background-color: #218838;
+}
+.table__td--actions .table__action--delete {
+  background-color: #dc3545;
+}
+.table__td--actions .table__action--delete:hover {
+  background-color: #c82333;
+}
+
+.table__form {
+  display: inline-block;
+  margin: 0;
+}
+
+.text-center {
+  text-align: center;
+  padding: 20px 0;
+  font-size: 18px;
+  color: #666;
+}
 /*# sourceMappingURL=app.css.map */

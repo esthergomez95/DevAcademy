@@ -6,7 +6,7 @@
                 Inicio
             </span>
         </a>
-        <a href="/admin/teachers" class="dashboard__link <?php echo current_page('/teachers') ? 'dashboard__link--active' : '' ?>">
+        <a href="/admin/teachers" class="dashboard__link <?php echo current_page('/teacher') ? 'dashboard__link--active' : '' ?>">
             <i class="fa-solid fa-user-tie dashboard__icon"></i>
             <span class = "dashboard__nav-text">
                 Profesores
