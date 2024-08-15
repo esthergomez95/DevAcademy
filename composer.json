@@ -18,6 +18,7 @@
     "require": {
         "phpmailer/phpmailer": "^v6.6.3",
         "vlucas/phpdotenv": "^5.4",
-        "intervention/image": "^2.7"
+        "intervention/image": "2.7",
+      "ext-gd": "*"
     }
 }

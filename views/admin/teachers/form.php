@@ -23,12 +23,16 @@
         <input type="file" class="form__input form__input--file" id="image" name="image">
     </div>
 
-    <?php if(isset($teacher->current_image)) { ?>
+    <?php if (isset($teacher->image)) { ?>
         <p class="form__text">Current Image:</p>
         <div class="form__image">
             <picture>
-                <source srcset="<?php echo $_ENV['HOST'] . '/img/teacher/' . $teacher->image; ?>.png" type="image/png">
-                <img src="<?php echo $_ENV['HOST'] . 'build/img/teacher/' . $teacher->image; ?>.png" alt="Teacher Image">
+                <?php
+                $imagePath = $_ENV['HOST'] . '/img/teachers/' . $teacher->image;
+                $imageExtension = pathinfo($teacher->image, PATHINFO_EXTENSION);
+                ?>
+                <source srcset="<?php echo $imagePath; ?>" type="image/<?php echo $imageExtension; ?>">
+                <img src="<?php echo $imagePath; ?>" alt="Teacher Image">
             </picture>
         </div>
     <?php } ?>

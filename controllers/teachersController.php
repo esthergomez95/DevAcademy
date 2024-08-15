@@ -2,8 +2,6 @@
 
 namespace Controllers;
 
-use Intervention\Image\ImageManager as Image;
-use Intervention\Image\Drivers\Gd\Driver;
 use Model\Teacher;
 use MVC\Router;
 
@@ -11,9 +9,9 @@ class teachersController {
     public static function index(Router $router) {
         $teachers = Teacher::all();
 
-        $router->render('admin/teacher/index', [
+        $router->render('admin/teachers/index', [
             'title' => 'Profesores',
-            'teacher' => $teachers
+            'teachers' => $teachers
         ]);
     }
 
@@ -23,44 +21,36 @@ class teachersController {
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if (!empty($_FILES['image']['tmp_name'])) {
-                $directory_images = '../public/img/teacher';
+                $imageDirectory = '../public/img/teachers';
 
-                // Asegurarse de que el directorio exista
-                if (!is_dir($directory_images)) {
-                    mkdir($directory_images, 0755, true);
+                if (!is_dir($imageDirectory)) {
+                    mkdir($imageDirectory, 0755, true);
                 }
 
-                // Procesar la imagen usando ImageManagerStatic
-                $manager = new Image(Driver::class);
-                $image_png = $manager->read($_FILES['image']['tmp_name'])->cover(800,600);
-                $name_image = md5(uniqid(rand(), true));
-                $_POST['image'] = $name_image;
+                $imageInfo = getimagesize($_FILES['image']['tmp_name']);
+                $extension = ($imageInfo['mime'] === 'image/png') ? '.png' : '.jpg';
+                $imageName = md5(uniqid(rand(), true)) . $extension;
+                $_POST['image'] = $imageName;
+
+                // Save and optimize the image
+                self::saveOptimizedImage($imageName, $_FILES['image']['tmp_name'], $extension, 800, 600, $imageDirectory);
             }
 
-            // Sincronizar datos del POST con el modelo
             $teacher->synchronize($_POST);
-
-            // Validar datos
             $alerts = $teacher->validate();
 
             if (empty($alerts)) {
-                if (isset($name_image)) {
-                    // Guardar la imagen
-                    $image_png->save($directory_images . '/' . $name_image . '.png');
-                }
-
-                // Guardar el profesor
                 $result = $teacher->save();
                 if ($result) {
-                    header('Location: /admin/teacher');
-                    exit(); // Asegúrate de detener la ejecución después de redirigir
+                    header('Location: /admin/teachers');
+                    exit();
                 } else {
-                    $alerts[] = 'No se pudo guardar el profesor.';
+                    $alerts[] = 'El profeson no ha podido ser guardado';
                 }
             }
         }
 
-        $router->render('admin/teacher/create', [
+        $router->render('admin/teachers/create', [
             'title' => 'Registrar profesor',
             'alerts' => $alerts,
             'teacher' => $teacher
@@ -72,55 +62,97 @@ class teachersController {
         $id = isset($_GET['id']) ? filter_var($_GET['id'], FILTER_VALIDATE_INT) : null;
 
         if (!$id) {
-            header('Location: /admin/teacher');
-            exit(); // Asegúrate de detener la ejecución después de redirigir
+            header('Location: /admin/teachers');
+            exit();
         }
 
         $teacher = Teacher::find($id);
         if (empty($teacher)) {
-            header('Location: /admin/teacher');
-            exit(); // Asegúrate de detener la ejecución después de redirigir
+            header('Location: /admin/teachers');
+            exit();
         }
 
-        $teacher->current_image = $teacher->image;
+        $teacher->currentImage = $teacher->image;
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if (!empty($_FILES['image']['tmp_name'])) {
-                $directory_images = '../public/img/teacher/';
+                $imageDirectory = '../public/img/teachers';
 
-                if (!is_dir($directory_images)) {
-                    mkdir($directory_images, 0755, true);
+                if (!is_dir($imageDirectory)) {
+                    mkdir($imageDirectory, 0755, true);
                 }
 
-                $image_png = Image::make($_FILES['image']['tmp_name'])->fit(800, 800)->encode('png', 80);
-                $name_image = md5(uniqid(rand(), true));
-                $_POST['image'] = $name_image;
+                $imageInfo = getimagesize($_FILES['image']['tmp_name']);
+                $extension = ($imageInfo['mime'] === 'image/png') ? '.png' : '.jpg';
+                $imageName = md5(uniqid(rand(), true)) . $extension;
+                $_POST['image'] = $imageName;
+
+                // Save and optimize the image
+                self::saveOptimizedImage($imageName, $_FILES['image']['tmp_name'], $extension, 800, 600, $imageDirectory);
             } else {
-                $_POST['image'] = $teacher->current_image;
+                $_POST['image'] = $teacher->currentImage;
             }
 
             $teacher->synchronize($_POST);
             $alerts = $teacher->validate();
 
             if (empty($alerts)) {
-                if (!empty($_FILES['image']['tmp_name'])) {
-                    $image_png->save($directory_images . '/' . $name_image . '.png');
-                }
                 $result = $teacher->save();
-
                 if ($result) {
-                    header('Location: /admin/teacher');
-                    exit(); // Asegúrate de detener la ejecución después de redirigir
+                    header('Location: /admin/teachers');
+                    exit();
                 } else {
-                    $alerts[] = 'No se pudo actualizar el profesor.';
+                    $alerts[] = 'The teacher could not be updated.';
                 }
             }
         }
 
-        $router->render('admin/teacher/edit', [
-            'title' => 'Editar profesor',
+        $router->render('admin/teachers/edit', [
+            'title' => 'Modificar profesor',
             'alerts' => $alerts,
             'teacher' => $teacher ?? null
         ]);
+    }
+
+    private static function saveOptimizedImage($imageName, $tmpName, $extension, $newWidth, $newHeight, $imageDirectory) {
+        move_uploaded_file($tmpName, $imageDirectory . '/' . $imageName);
+
+        if ($extension === '.png') {
+            $editedImage = imagecreatefrompng($imageDirectory . '/' . $imageName);
+        } else {
+            $editedImage = imagecreatefromjpeg($imageDirectory . '/' . $imageName);
+        }
+
+        $width = imagesx($editedImage);
+        $height = imagesy($editedImage);
+
+        $destination = imagecreatetruecolor($newWidth, $newHeight);
+        imagecopyresampled($destination, $editedImage, 0, 0, 0, 0, $newWidth, $newHeight, $width, $height);
+
+        if ($extension === '.png') {
+            imagepng($destination, $imageDirectory . '/' . $imageName);
+        } else {
+            imagejpeg($destination, $imageDirectory . '/' . $imageName);
+        }
+
+        imagedestroy($editedImage);
+        imagedestroy($destination);
+    }
+
+    public static function delete(){
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $id = $_POST['id'];
+            $teacher = Teacher::find($id);
+            if(!isset($teacher)) {
+                header('Location: /admin/teachers');
+                exit();
+            }
+            $result = $teacher->delete();
+            if ($result) {
+                header('Location: /admin/teachers');
+                exit();
+            }
+
+        }
     }
 }
