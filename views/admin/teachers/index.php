@@ -8,7 +8,7 @@
 </div>
 
 <div class="dashboard__container">
-    <?php if (!empty($teachers)) : ?>
+    <?php if (!empty($teacherss)) : ?>
         <table class="table">
             <thead class="table__thead">
             <tr>
@@ -20,25 +20,25 @@
             </thead>
 
             <tbody class="table__tbody">
-            <?php foreach ($teachers as $teacher) : ?>
+            <?php foreach ($teacherss as $teachers) : ?>
                 <tr class="table__tr">
                     <td class="table__td">
-                        <?= htmlspecialchars($teacher->name . " " . $teacher->surname, ENT_QUOTES, 'UTF-8') ?>
+                        <?= htmlspecialchars($teachers->name . " " . $teachers->surname, ENT_QUOTES, 'UTF-8') ?>
                     </td>
                     <td class="table__td">
-                        <?= htmlspecialchars($teacher->city . ", " . $teacher->country, ENT_QUOTES, 'UTF-8') ?>
+                        <?= htmlspecialchars($teachers->city . ", " . $teachers->country, ENT_QUOTES, 'UTF-8') ?>
                     </td>
                     <td class="table__td">
-                        <?= htmlspecialchars($teacher->tags, ENT_QUOTES, 'UTF-8') ?>
+                        <?= htmlspecialchars($teachers->tags, ENT_QUOTES, 'UTF-8') ?>
                     </td>
                     <td class="table__td--actions">
-                        <a class="table__action table__action--edit" href="/admin/teachers/edit?id=<?= htmlspecialchars($teacher->id, ENT_QUOTES, 'UTF-8') ?>">
+                        <a class="table__action table__action--edit" href="/admin/teachers/edit?id=<?= htmlspecialchars($teachers->id, ENT_QUOTES, 'UTF-8') ?>">
                             <i class="fa-solid fa-user-pen"></i>
                             Editar
                         </a>
 
                         <form method="POST" action="/admin/teachers/delete" class="table__form">
-                            <input type="hidden" name="id" value="<?= htmlspecialchars($teacher->id, ENT_QUOTES, 'UTF-8') ?>">
+                            <input type="hidden" name="id" value="<?= htmlspecialchars($teacherss->id, ENT_QUOTES, 'UTF-8') ?>">
                             <button class="table__action table__action--delete" type="submit">
                                 <i class="fa-solid fa-circle-xmark"></i>
                                 Eliminar
@@ -53,7 +53,3 @@
         <p class="text-center">No hay profesores todavía</p>
     <?php endif; ?>
 </div>
-
-<?php if (isset($pagination)) : ?>
-    <?= $pagination ?>
-<?php endif; ?>

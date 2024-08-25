@@ -2,13 +2,16 @@
 
 namespace Controllers;
 
-use Model\Teacher;
+use Model\Teachers;
 use MVC\Router;
 
 class teachersController {
     public static function index(Router $router) {
-        $teachers = Teacher::all();
+        $teachers = Teachers::all();
+        if(!is_admin()){
+            header('Location: /login');
 
+        }
         $router->render('admin/teachers/index', [
             'title' => 'Profesores',
             'teachers' => $teachers
@@ -17,8 +20,11 @@ class teachersController {
 
     public static function create(Router $router) {
         $alerts = [];
-        $teacher = new Teacher;
+        $teachers = new Teachers;
 
+        if(!is_admin()){
+            header('Location: /login');
+        }
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if (!empty($_FILES['image']['tmp_name'])) {
                 $imageDirectory = '../public/img/teachers';
@@ -36,11 +42,11 @@ class teachersController {
                 self::saveOptimizedImage($imageName, $_FILES['image']['tmp_name'], $extension, 800, 600, $imageDirectory);
             }
 
-            $teacher->synchronize($_POST);
-            $alerts = $teacher->validate();
+            $teachers->synchronize($_POST);
+            $alerts = $teachers->validate();
 
             if (empty($alerts)) {
-                $result = $teacher->save();
+                $result = $teachers->save();
                 if ($result) {
                     header('Location: /admin/teachers');
                     exit();
@@ -53,11 +59,14 @@ class teachersController {
         $router->render('admin/teachers/create', [
             'title' => 'Registrar profesor',
             'alerts' => $alerts,
-            'teacher' => $teacher
+            'teachers' => $teachers
         ]);
     }
 
     public static function edit(Router $router) {
+        if(!is_admin()){
+            header('Location: /login');
+        }
         $alerts = [];
         $id = isset($_GET['id']) ? filter_var($_GET['id'], FILTER_VALIDATE_INT) : null;
 
@@ -66,13 +75,13 @@ class teachersController {
             exit();
         }
 
-        $teacher = Teacher::find($id);
-        if (empty($teacher)) {
+        $teachers = Teachers::find($id);
+        if (empty($teachers)) {
             header('Location: /admin/teachers');
             exit();
         }
 
-        $teacher->currentImage = $teacher->image;
+        $teachers->currentImage = $teachers->image;
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if (!empty($_FILES['image']['tmp_name'])) {
@@ -90,14 +99,14 @@ class teachersController {
                 // Save and optimize the image
                 self::saveOptimizedImage($imageName, $_FILES['image']['tmp_name'], $extension, 800, 600, $imageDirectory);
             } else {
-                $_POST['image'] = $teacher->currentImage;
+                $_POST['image'] = $teachers->currentImage;
             }
 
-            $teacher->synchronize($_POST);
-            $alerts = $teacher->validate();
+            $teachers->synchronize($_POST);
+            $alerts = $teachers->validate();
 
             if (empty($alerts)) {
-                $result = $teacher->save();
+                $result = $teachers->save();
                 if ($result) {
                     header('Location: /admin/teachers');
                     exit();
@@ -110,7 +119,7 @@ class teachersController {
         $router->render('admin/teachers/edit', [
             'title' => 'Modificar profesor',
             'alerts' => $alerts,
-            'teacher' => $teacher ?? null
+            'teachers' => $teachers ?? null
         ]);
     }
 
@@ -140,14 +149,17 @@ class teachersController {
     }
 
     public static function delete(){
+        if(!is_admin()){
+            header('Location: /login');
+        }
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $id = $_POST['id'];
-            $teacher = Teacher::find($id);
-            if(!isset($teacher)) {
+            $teachers = Teachers::find($id);
+            if(!isset($teachers)) {
                 header('Location: /admin/teachers');
                 exit();
             }
-            $result = $teacher->delete();
+            $result = $teachers->delete();
             if ($result) {
                 header('Location: /admin/teachers');
                 exit();

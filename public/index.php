@@ -44,6 +44,9 @@ $router->get('/admin/teachers/edit', [teachersController::class, 'edit']);
 $router->post('/admin/teachers/delete', [teachersController::class, 'delete']);
 
 $router->get('/admin/courses', [coursesController::class, 'index']);
+$router->get('/admin/courses/create', [coursesController::class, 'create']);
+$router->post('/admin/courses/create', [coursesController::class, 'create']);
+
 $router->get('/admin/registers', [registersController::class, 'index']);
 
 

@@ -2,7 +2,7 @@
 
 namespace Model;
 
-class Teacher extends ActiveRecord{
+class Teachers extends ActiveRecord{
 
     protected static $table = 'teachers';
     protected static $columnsDB = ['id', 'created', 'name', 'surname', 'city', 'country', 'image', 'tags'];
