@@ -13,7 +13,7 @@
             <div class="nav__logo"><img src="build/img/logo.png" alt="logo"></div>
             <nav class="nav__nav">
                 <a href="/about">Quienes somos</a>
-                <a href="/packages">Paquetes</a>
+                <a href="/plans">Planes</a>
                 <a href="#">Eventos</a>
                 <a href="/courses">Cursos</a>
             </nav>
