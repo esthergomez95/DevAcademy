@@ -48,6 +48,6 @@
 
     <div class="form__field">
         <label for="price" class="form__label">Precio del Curso</label>
-        <input type="number" class="form__input" id="price" name="price" placeholder="Establece el precio del curso (en USD)" value="<?php echo $courses->price ?? ''; ?>">
+        <input type="number" step="any" class="form__input" id="price" name="price" placeholder="Establece el precio del curso (en USD)" value="<?php echo $courses->price ?? ''; ?>">
     </div>
 </fieldset>

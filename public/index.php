@@ -4,6 +4,7 @@ require_once __DIR__ . '/../includes/app.php';
 
 use Controllers\coursesController;
 use Controllers\dashboardController;
+use Controllers\pagesController;
 use Controllers\registersController;
 use Controllers\teachersController;
 use MVC\Router;
@@ -46,8 +47,16 @@ $router->post('/admin/teachers/delete', [teachersController::class, 'delete']);
 $router->get('/admin/courses', [coursesController::class, 'index']);
 $router->get('/admin/courses/create', [coursesController::class, 'create']);
 $router->post('/admin/courses/create', [coursesController::class, 'create']);
+$router->post('/admin/courses/edit', [coursesController::class, 'edit']);
+$router->get('/admin/courses/edit', [coursesController::class, 'edit']);
+$router->post('/admin/courses/delete', [coursesController::class, 'delete']);
 
 $router->get('/admin/registers', [registersController::class, 'index']);
 
+//Area  Publica
+$router->get('/', [pagesController::class, 'index']);
+$router->get('/about', [pagesController::class, 'about']);
+$router->get('/courses', [pagesController::class, 'courses']);
+$router->get('/plans', [pagesController::class, 'plans']);
 
 $router->checkRoutes();

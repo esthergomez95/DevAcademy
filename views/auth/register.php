@@ -10,15 +10,15 @@
     <form method="POST" action="/register" class="form">
         <div class="form__field">
             <label class="form__label" for="name">Nombre</label>
-            <input class="form__input" type="text" placeholder="Introduce tu nombre" id="name" name="name" value="<?php echo htmlspecialchars($user->name ?? '', ENT_QUOTES); ?>" required>
+            <input class="form__input" type="text" placeholder="Introduce tu nombre" id="name" name="name" value="<?php echo s($user->name ?? '', ENT_QUOTES); ?>" required>
         </div>
         <div class="form__field">
             <label class="form__label" for="surname">Apellidos</label>
-            <input class="form__input" type="text" placeholder="Introduce tu apellido" id="surname" name="surname" value="<?php echo htmlspecialchars($user->surname ?? '', ENT_QUOTES); ?>" required>
+            <input class="form__input" type="text" placeholder="Introduce tu apellido" id="surname" name="surname" value="<?php echo s($user->surname ?? '', ENT_QUOTES); ?>" required>
         </div>
         <div class="form__field">
             <label class="form__label" for="email">Correo Electrónico</label>
-            <input class="form__input" type="email" placeholder="Introduce tu email" id="email" name="email" value="<?php echo htmlspecialchars($user->email ?? '', ENT_QUOTES); ?>" required>
+            <input class="form__input" type="email" placeholder="Introduce tu email" id="email" name="email" value="<?php echo s($user->email ?? '', ENT_QUOTES); ?>" required>
         </div>
         <div class="form__field">
             <label class="form__label" for="password">Contraseña</label>

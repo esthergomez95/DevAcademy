@@ -1,0 +1,44 @@
+@use '../base/variables' as v;
+@use '../base/mixins' as m;
+
+.devacademy {
+
+  &__subtitle {
+    text-align: center;
+    font-style: italic;
+    margin-bottom: 2rem;
+  }
+
+  &__grid {
+    @include m.container;
+    @include m.grid(1, 3rem);
+    @include m.tablet {
+      @include m.grid(2, 5rem);
+      align-items: center;
+    }
+  }
+
+  &__image {
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+    img {
+      width: 100%;
+      height: auto;
+      transition: transform 0.3s ease;
+
+      &:hover {
+        transform: scale(1.05);
+      }
+    }
+  }
+
+
+
+  &__paragraph {
+    line-height: 1.8;
+    margin-bottom: 1.5rem;
+  }
+  
+}

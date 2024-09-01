@@ -10,12 +10,6 @@ class ActiveRecord {
     // Alertas y Mensajes
     protected static $alerts = [];
 
-    public $id;
-    public $image;
-    public $title;
-    public $price;
-
-
     // Definir la conexión a la BD - includes/database.php
     public static function setDB($database) {
         self::$db = $database;
@@ -108,6 +102,8 @@ class ActiveRecord {
         $result = '';
         if(!is_null($this->id)) {
             // actualizar
+
+
             $result = $this->update();
         } else {
             // Creando un nuevo record

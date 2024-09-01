@@ -50,10 +50,10 @@ class Email {
         $content .= '</style>';
         $content .= '</head>';
         $content .= '<body>';
-        $content .= '<p><strong>Hola ' . htmlspecialchars($this->name, ENT_QUOTES, 'UTF-8') . ',</strong></p>';
+        $content .= '<p><strong>Hola ' . s($this->name, ENT_QUOTES, 'UTF-8') . ',</strong></p>';
         $content .= '<p>Has registrado correctamente tu cuenta en DevAcademy. Sin embargo, es necesario confirmar tu cuenta para completar el proceso de registro.</p>';
         $content .= '<p>Para confirmar tu cuenta, presiona el siguiente enlace:</p>';
-        $content .= '<p><a href="' . htmlspecialchars($_ENV['HOST'], ENT_QUOTES, 'UTF-8') . '/confirm-account?token=' . htmlspecialchars($this->token, ENT_QUOTES, 'UTF-8') . '">Confirmar Cuenta</a></p>';
+        $content .= '<p><a href="' . s($_ENV['HOST'], ENT_QUOTES, 'UTF-8') . '/confirm-account?token=' . htmlspecialchars($this->token, ENT_QUOTES, 'UTF-8') . '">Confirmar Cuenta</a></p>';
         $content .= '<p>Si no creaste esta cuenta, ignora este mensaje.</p>';
         $content .= '</body>';
         $content .= '</html>';
@@ -97,9 +97,9 @@ class Email {
         $content .= '</style>';
         $content .= '</head>';
         $content .= '<body>';
-        $content .= '<p><strong>Hola ' . htmlspecialchars($this->name, ENT_QUOTES, 'UTF-8') . ',</strong></p>';
+        $content .= '<p><strong>Hola ' . s($this->name, ENT_QUOTES, 'UTF-8') . ',</strong></p>';
         $content .= '<p>Recibimos una solicitud para cambiar tu contraseña. Por favor, accede al siguiente enlace para completar el proceso:</p>';
-        $content .= '<p><a href="' . htmlspecialchars($_ENV['HOST'], ENT_QUOTES, 'UTF-8') . '/reset?token=' . htmlspecialchars($this->token, ENT_QUOTES, 'UTF-8') . '">Cambiar Contraseña</a></p>';
+        $content .= '<p><a href="' . s($_ENV['HOST'], ENT_QUOTES, 'UTF-8') . '/reset?token=' . s($this->token, ENT_QUOTES, 'UTF-8') . '">Cambiar Contraseña</a></p>';
         $content .= '<p>Si no hiciste esta solicitud, simplemente ignora este mensaje.</p>';
         $content .= '</body>';
         $content .= '</html>';
