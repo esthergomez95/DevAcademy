@@ -35,11 +35,12 @@ class teachersController {
 
                 $imageInfo = getimagesize($_FILES['image']['tmp_name']);
                 $extension = ($imageInfo['mime'] === 'image/png') ? '.png' : '.jpg';
-                $imageName = md5(uniqid(rand(), true)) . $extension;
-                $_POST['image'] = $imageName;
+                $temporaryImageName = md5(uniqid(rand(), true)) . $extension;
+                move_uploaded_file($_FILES['image']['tmp_name'], $imageDirectory . '/' . $temporaryImageName);
+                $_POST['image'] = $temporaryImageName;
 
                 // Save and optimize the image
-                self::saveOptimizedImage($imageName, $_FILES['image']['tmp_name'], $extension, 800, 600, $imageDirectory);
+                self::saveOptimizedImage($temporaryImageName, $_FILES['image']['tmp_name'], $extension, 800, 600, $imageDirectory);
             }
 
             $teachers->synchronize($_POST);
@@ -47,11 +48,17 @@ class teachersController {
 
             if (empty($alerts)) {
                 $result = $teachers->save();
+
                 if ($result) {
+                    $finalImageName = 'teacher_' . $teachers->id . $extension;
+                    rename($imageDirectory . '/' . $temporaryImageName, $imageDirectory . '/' . $finalImageName);
+                    $teachers->image = $finalImageName;
+                    $teachers->save(); // Guarda el nombre final de la imagen en la base de datos
+
                     header('Location: /admin/teachers');
                     exit();
                 } else {
-                    $alerts[] = 'El profeson no ha podido ser guardado';
+                    $alerts[] = 'El profesor no ha podido ser guardado';
                 }
             }
         }

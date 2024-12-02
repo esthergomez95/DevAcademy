@@ -7,6 +7,8 @@ class ActiveRecord {
     protected static $table = '';
     protected static $columnsDB = [];
 
+    protected static $filters = [];
+
     // Alertas y Mensajes
     protected static $alerts = [];
 
@@ -103,7 +105,6 @@ class ActiveRecord {
         if(!is_null($this->id)) {
             // actualizar
 
-
             $result = $this->update();
         } else {
             // Creando un nuevo record
@@ -137,30 +138,35 @@ class ActiveRecord {
     public static function where($column, $value) {
         $query = "SELECT * FROM " . static::$table . " WHERE ${column} = '${value}'";
         $result = self::querySQL($query);
-        return array_shift( $result ) ;
+        return  array_shift($result);
     }
 
     // crea un nuevo record
-    public function create() {
+    public function create()
+    {
         // Sanitizar los datos
         $attributte = $this->sanitizeAttribute();
 
         // Insertar en la base de datos
-        $query = " INSERT INTO " . static::$table . " ( ";
+        $query = "INSERT INTO " . static::$table . " (";
         $query .= join(', ', array_keys($attributte));
-        $query .= " ) VALUES (' "; 
+        $query .= ") VALUES ('";
         $query .= join("', '", array_values($attributte));
-        $query .= " ') ";
+        $query .= "')";
 
-        // debuguear($query); // Descomentar si no te funciona algo
+       //debuguear($query); // Descomentar si no te funciona algo
 
         // Resultado de la consulta
         $result = self::$db->query($query);
-        return [
-           'result' =>  $result,
-           'id' => self::$db->insert_id
-        ];
+        if ($result) {
+            $this->id = self::$db->insert_id;
+            return [
+                'result' => $result,
+                'id' => $this->id
+            ];
+        }
     }
+
 
     // Actualizar el record
     public function update() {
@@ -188,6 +194,26 @@ class ActiveRecord {
     public function delete() {
         $query = "DELETE FROM "  . static::$table . " WHERE id = " . self::$db->escape_string($this->id) . " LIMIT 1";
         $result = self::$db->query($query);
+        return $result;
+    }
+
+    public static function addFilter($column, $value) {
+        static::$filters[] = "${column} = '" . self::$db->escape_string($value) . "'";
+        return new static;
+    }
+
+    protected static function buildQuery() {
+        $query = "SELECT * FROM " . static::$table;
+        if (!empty(static::$filters)) {
+            $query .= " WHERE " . join(' AND ', static::$filters);
+        }
+        return $query;
+    }
+
+    public static function getFiltered() {
+        $query = static::buildQuery();
+        $result = self::querySQL($query);
+        static::$filters = [];
         return $result;
     }
 }

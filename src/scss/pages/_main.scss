@@ -1,0 +1,236 @@
+// Estilos para la sección de bienvenida
+.welcome-section {
+  background: linear-gradient(135deg, #b4b5cc, #007bff);
+  text-align: center;
+  padding: 60px 20px;
+  position: relative;
+  overflow: hidden;
+
+  h1 {
+    font-size: 3rem;
+    color: #000000;
+    margin-bottom: 20px;
+    letter-spacing: 2px;
+    z-index: 2;
+    position: relative;
+    animation: fadeInDown 1s ease-in-out;
+
+
+    &::after {
+      content: '';
+      display: block;
+      width: 100px;
+      height: 4px;
+      background-color: #fff;
+      margin: 10px auto 0;
+      animation: growLine 1s ease-in-out;
+    }
+  }
+
+  p {
+    font-size: 2rem;
+    color: #eee;
+    z-index: 2;
+    position: relative;
+    max-width: 800px;
+    margin: 0 auto 40px;
+    line-height: 1.6;
+    animation: fadeInUp 1s ease-in-out;
+  }
+
+  .btn-main {
+    padding: 15px 40px;
+    background-color: #000000;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 50px;
+    font-size: 1.8rem;
+    font-weight: bold;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    z-index: 2;
+    position: relative;
+    transition: all 0.3s ease;
+
+    &:hover {
+      background-color: #19262e;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    }
+  }
+
+  @keyframes fadeInDown {
+    from {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes growLine {
+    from {
+      width: 0;
+    }
+    to {
+      width: 100px;
+    }
+  }
+
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-20px);
+    }
+  }
+}
+
+.testimonials {
+  background-color: #f0f4f8;
+  padding: 80px 20px;
+  position: relative;
+  overflow: hidden;
+
+  h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 40px;
+    color: #333;
+    position: relative;
+  }
+
+  .testimonials-list {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap;
+
+    .testimonial {
+      background-color: #fff;
+      border: 1px solid #ddd;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      padding: 30px;
+      border-radius: 15px;
+      width: 400px;
+      text-align: center;
+      font-style: italic;
+      position: relative;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+      &:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+      }
+
+      &::before {
+        content: '“';
+        font-size: 4rem;
+        color: #007bff;
+        position: absolute;
+        top: -20px;
+        left: -10px;
+      }
+
+      &::after {
+        content: '”';
+        font-size: 4rem;
+        color: #007bff;
+        position: absolute;
+        bottom: -20px;
+        right: -10px;
+      }
+
+      p {
+        font-size: 2rem;
+        line-height: 1.6;
+        color: #555;
+        margin: 0;
+      }
+
+      span {
+        display: block;
+        margin-top: 20px;
+        font-weight: bold;
+        font-size: 1.5rem;
+        color: #007bff;
+      }
+    }
+  }
+}
+
+
+.cta-register {
+  background-color: #007bff;
+  color: #fff;
+  padding: 40px 20px;
+  margin-bottom: 8rem;
+  text-align: center;
+
+  p {
+    margin-bottom: 30px;
+  }
+
+  .btn-main {
+    padding: 15px 30px;
+    background-color: #fff;
+    color: 007bff;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 1.5rem;
+    font-weight: bold;
+
+    &:hover {
+      background-color: #fff;
+      color: #000000;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .welcome-section {
+    padding: 60px 10px;
+
+    h1 {
+      font-size: 2rem;
+    }
+
+    p {
+      font-size: 1rem;
+    }
+  }
+
+  .testimonials .testimonial {
+    width: 100%;
+  }
+
+  .cta-register {
+    padding: 40px 10px;
+
+    h2 {
+      font-size: 2rem;
+    }
+
+    p {
+      font-size: 1rem;
+    }
+
+    .btn-main {
+      padding: 10px 20px;
+      font-size: 1rem;
+    }
+  }
+}

@@ -14,12 +14,11 @@ class coursesController{
             header('Location: /login');
             exit();
         }
-        foreach ($courses as $course) {
-            $course->teacher = $course->getTeacher();
-        }
+
+
         $router->render('admin/courses/index', [
             'title' => 'Cursos',
-            'courses' => $courses
+            'courses' => $courses,
         ]);
     }
 
@@ -127,5 +126,6 @@ class coursesController{
                 $alerts['error'][] = 'Error al eliminar el curso.';
             }
         }
+
     }
 }

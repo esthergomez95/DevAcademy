@@ -1,4 +1,4 @@
-const radioButtons = document.querySelectorAll('input[name="plan"]');
+const radioButtons = document.querySelectorAll('input[name="plan"], input[name="plan_id"]');
 
 radioButtons.forEach(radio => {
     radio.addEventListener('change', function() {

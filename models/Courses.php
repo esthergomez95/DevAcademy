@@ -49,7 +49,7 @@ class Courses extends ActiveRecord
         if (!$this->outcomes) {
             self::$alerts['error'][] = 'Los Requisitos son obligatorios';
         }
-        if (!$this->outcomes) {
+        if (!$this->requirements) {
             self::$alerts['error'][] = 'Los Resultados de Aprendizaje son obligatorios';
         }
         if ($this->price <= 0 || !filter_var($this->price, FILTER_VALIDATE_FLOAT)) {
@@ -62,9 +62,5 @@ class Courses extends ActiveRecord
             self::$alerts['error'][] = 'Selecciona un Profesor válido';
         }
         return self::$alerts;
-    }
-
-    public function getTeacher(){
-        return Teachers::find($this->teacher_id);
     }
 }

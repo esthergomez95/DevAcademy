@@ -4,55 +4,55 @@ namespace Controllers;
 
 use Classes\Email;
 use Model\User;
+use MVC\models\Registers;
 use MVC\Router;
 
 class authController {
     public static function login(Router $router) {
-
         $alerts = [];
 
-        if($_SERVER['REQUEST_METHOD'] === 'POST') {
-    
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $user = new User($_POST);
-
             $alerts = $user->validateLogin();
-            
-            if(empty($alerts)) {
-                // Verificar quel el user exista
+
+            if (empty($alerts)) {
+                // Verificar que el usuario exista
                 $user = User::where('email', $user->email);
-                if(!$user || !$user->confirmed ) {
-                    User::setAlert('error', 'The User Does Not Exist or is not there 
-                    confirmed');
+
+                if (!$user || !$user->confirmed) {
+                    User::setAlert('error', 'El usuario no existe o no ha sido confirmado.');
                 } else {
-                    // El User existe
-                    if( password_verify($_POST['password'], $user->password) ) {
-                        
+                    // El usuario existe y está confirmado
+                    if (password_verify($_POST['password'], $user->password)) {
+
                         // Iniciar la sesión
-                        session_start();    
+                        session_start();
                         $_SESSION['id'] = $user->id;
                         $_SESSION['name'] = $user->name;
                         $_SESSION['surname'] = $user->surname;
                         $_SESSION['email'] = $user->email;
                         $_SESSION['admin'] = $user->admin ?? null;
 
-                        if($user->admin) {
-                            header('Location: /admin/dashboard');
-                        }
-                        else {
+                        // Comprobar si ha completado el registro desde la tabla `users`
+                        if ($user->completed_registration == 0) {
                             header('Location: /finish-registration');
+                        } elseif ($user->admin) {
+                            header('Location: /admin/dashboard');
+                        } else {
+                            header('Location: /main');
                         }
-
+                        exit;
 
                     } else {
-                        User::setAlert('error', 'Incorrect password');
+                        User::setAlert('error', 'Contraseña incorrecta.');
                     }
                 }
             }
         }
 
         $alerts = User::getAlert();
-        
-        // Render a la vista 
+
+        // Renderizar la vista de inicio de sesión
         $router->render('auth/login', [
             'title' => 'Iniciar Sesión',
             'alerts' => $alerts
@@ -72,17 +72,17 @@ class authController {
         $alerts = [];
         $user = new User;
 
-        if($_SERVER['REQUEST_METHOD'] === 'POST') {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             $user->synchronize($_POST);
-            
+
             $alerts = $user->validateAccount();
 
-            if(empty($alerts)) {
+            if (empty($alerts)) {
                 $userExist = User::where('email', $user->email);
 
-                if($userExist) {
-                    User::setAlert('error', 'El User ya esta registrado');
+                if ($userExist) {
+                    User::setAlert('error', 'El usuario ya está registrado.');
                     $alerts = User::getAlert();
                 } else {
                     // Hashear el password
@@ -94,24 +94,26 @@ class authController {
                     // Generar el Token
                     $user->createToken();
 
-                    // Crear un nuevo user
-                    $result =  $user->save();
+                    // Establecer el campo completed_registration como 0 (registro no completado)
+                    $user->completed_registration = 0;
 
-                    // Enviar email
+                    // Crear un nuevo usuario
+                    $result = $user->save();
+
+                    // Enviar email de confirmación
                     $email = new Email($user->email, $user->name, $user->token);
                     $email->sendConfirmation();
-                    
 
-                    if($result) {
+                    if ($result) {
                         header('Location: /message');
                     }
                 }
             }
         }
 
-        // Render a la vista
+        // Renderizar la vista de registro
         $router->render('auth/register', [
-            'title' => 'Crea tu cuenta en DevWebcamp',
+            'title' => 'Crea tu cuenta en DevAcademy',
             'user' => $user,
             'alerts' => $alerts
         ]);
@@ -223,8 +225,6 @@ class authController {
 
             User::setAlert('success', 'Su cuenta ha sido confirmada con exito');
         }
-
-     
 
         $router->render('auth/confirm', [
             'title' => 'Confirma tu cuenta DevWebcamp',

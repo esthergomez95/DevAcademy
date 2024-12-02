@@ -1,0 +1,137 @@
+@use '../base/variables' as v;
+@use '../base/mixins' as m;
+
+
+.plans {
+  &__header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+
+  &__container {
+
+  }
+
+
+  &__submit {
+    @include m.button(v.$blue, v.$white);
+    margin-top: 3rem;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    &:hover {
+      background-color: darken(v.$blue, 10%);
+      color: darken(v.$white, 10%);
+    }
+  }
+}
+
+.plan {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 4rem;
+  background-color: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+
+  &:nth-child(2) {
+    order: -1;
+  }
+
+  &__description {
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  &__toggle{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1rem;
+  }
+
+  &__list {
+    @include m.reset-list;
+    line-height: 1.6;
+  }
+
+  &--free{
+    display: block;
+  }
+
+  &--premium{
+    display: none;
+  }
+  &__price {
+    font-size: 6rem;
+    margin: 3rem 0;
+    color: v.$blue;
+    font-weight: v.$black;
+    text-align: center;
+    background-color: lighten(v.$blue, 50%);
+    padding: 1rem;
+    border-radius: 10px;
+  }
+
+}
+
+.toggle__container-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 2.5rem 0;
+  flex-direction: column;
+}
+
+.toggle__container {
+  position: relative;
+  display: inline-flex;
+  background-color: v.$blue;
+  border-radius: 30px;
+  padding: 5px;
+
+  input[type="radio"] {
+    display: none;
+  }
+
+  .toggle__label {
+    width: 100px;
+    padding: 10px 20px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 30px;
+    z-index: 2;
+    text-align: center;
+  }
+
+  .toggle__slider {
+    position: absolute;
+    top: 5px;
+    bottom: 5px;
+    left: 5px;
+    right: calc(100% - 105px);
+    background-color: v.$blue-light;
+    border-radius: 30px;
+    transition: all 0.3s ease;
+    z-index: 1;
+  }
+
+  input[type="radio"]#premium:checked ~ .toggle__slider {
+    left: calc(100% - 105px);
+    right: 5px;
+  }
+
+  input[type="radio"]#free:checked ~ .toggle__slider {
+    left: 5px;
+    right: calc(100% - 105px);
+  }
+}
+
+

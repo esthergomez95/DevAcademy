@@ -10,8 +10,7 @@
     </div>
     <div class="nav">
         <div class="nav__container">
-            <div class="nav__logo"><img src="build/img/logo.png" alt="logo"></div>
-            <nav class="nav__nav">
+            <div class="nav__logo"><a href="/main"><img src="build/img/logo.png" alt="logo"></a></div>            <nav class="nav__nav">
                 <a href="/about">Quienes somos</a>
                 <a href="/plans">Planes</a>
                 <a href="#">Eventos</a>

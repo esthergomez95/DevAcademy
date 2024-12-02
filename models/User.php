@@ -33,6 +33,7 @@ class User extends ActiveRecord {
         $this->confirmed = $args['confirmed'] ?? 0;
         $this->token = $args['token'] ?? '';
         $this->admin = $args['admin'] ?? '';
+
     }
 
     // Validar el Login de Usuarios

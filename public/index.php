@@ -4,7 +4,9 @@ require_once __DIR__ . '/../includes/app.php';
 
 use Controllers\coursesController;
 use Controllers\dashboardController;
+use Controllers\finishRegistrationController;
 use Controllers\pagesController;
+use Controllers\paymentController;
 use Controllers\registersController;
 use Controllers\teachersController;
 use MVC\Router;
@@ -21,6 +23,14 @@ $router->post('/logout', [authController::class, 'logout']);
 // Crear Cuenta
 $router->get('/register', [authController::class, 'register']);
 $router->post('/register', [authController::class, 'register']);
+
+//Finish Registration
+$router->get('/finish-registration', [finishRegistrationController::class, 'index']);
+$router->post('/finish-registration', [finishRegistrationController::class, 'finishRegistration']);
+
+$router->get('/payment', [paymentController::class, 'index']);
+$router->post('/payment', [paymentController::class, 'processPayment']);
+$router->get('/payment/confirmation', [paymentController::class, 'confirmation']);
 
 // Formulario de forget mi password
 $router->get('/forget', [authController::class, 'forget']);
@@ -54,9 +64,10 @@ $router->post('/admin/courses/delete', [coursesController::class, 'delete']);
 $router->get('/admin/registers', [registersController::class, 'index']);
 
 //Area  Publica
-$router->get('/', [pagesController::class, 'index']);
+$router->get('/', [pagesController::class, 'main']);
 $router->get('/about', [pagesController::class, 'about']);
 $router->get('/courses', [pagesController::class, 'courses']);
 $router->get('/plans', [pagesController::class, 'plans']);
+$router->get('/main', [pagesController::class, 'main']);
 
 $router->checkRoutes();
