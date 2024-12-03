@@ -1101,22 +1101,16 @@ h3 {
   top: 20px;
   right: 20px;
 }
-.head__nav button {
+.head__nav a, .head__nav button {
   color: white;
   text-decoration: none;
   font-size: 1em;
   background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
 }
-.head__nav button:hover {
-  color: #ffcc00;
-  transform: scale(1.1);
-}
-.head__nav a {
-  color: white;
-  text-decoration: none;
-  font-size: 1em;
-}
-.head__nav a:hover {
+.head__nav a:hover, .head__nav button:hover {
   color: #ffcc00;
   transform: scale(1.1);
 }
@@ -1135,6 +1129,7 @@ h3 {
 }
 .nav__logo img {
   height: 40px;
+  width: auto;
 }
 .nav__nav {
   display: flex;

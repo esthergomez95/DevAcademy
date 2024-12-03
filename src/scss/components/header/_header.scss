@@ -2,12 +2,11 @@
 @use '../../base/variables' as v;
 
 .header {
-    &__container {
-      display: flex;
-      flex-direction: column;
-    }
+  &__container {
+    display: flex;
+    flex-direction: column;
+  }
 }
-
 
 .head {
   &__container {
@@ -17,7 +16,7 @@
     height: 400px;
     display: flex;
     padding: 20px;
-    position: relative
+    position: relative;
   }
 
   &__title {
@@ -28,7 +27,7 @@
     position: absolute;
     left: 20px;
     top: 50%;
-    transform: translateY(-50%)
+    transform: translateY(-50%);
   }
 
   &__title h1, h2 {
@@ -45,62 +44,58 @@
     top: 20px;
     right: 20px;
 
+    a, button {
+      color: white;
+      text-decoration: none;
+      font-size: 1em;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      padding: 0;
 
-  a, button {
-    color: white;
-    text-decoration: none;
-    font-size: 1em;
-    background: transparent;
-    border: none;
-    cursor: pointer;
-    padding: 0;
-
-    &:hover {
-      color: #ffcc00;
-      transform: scale(1.1);
-    }
-}
-
-  .nav{
-    padding: 10px 0;
-    background: linear-gradient(45deg, v.$blue-dark, v.$blue);
-
-    &__container {
-      max-width: 1200px;
-      margin: 0 auto;
-      display: flex;
-      align-items: center;
-      justify-content: space-around;
-      padding: 0 10px;
-    }
-
-    &__logo img {
-      height: 40px;
-    }
-
-    &__nav {
-      display: flex;
-      gap: 20px;
-
-      a {
-        color: #ffffff;
-        text-decoration: none;
-        font-size: 15px;
-        padding: 10px 15px;
-        transition: background-color 0.3s ease, color 0.1s ease;
-
-        &:hover,
-        &.active {
-          background-color: v.$blue-light;
-          color: #282c34;
-          border-radius: 5px;
-        }
+      &:hover {
+        color: #ffcc00;
+        transform: scale(1.1);
+      }
     }
   }
 }
 
+.nav {
+  padding: 10px 0;
+  background: linear-gradient(45deg, v.$blue-dark, v.$blue);
 
+  &__container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 0 10px;
+  }
 
+  &__logo img {
+    height: 40px; // Tamaño del logo controlado
+    width: auto;
+  }
 
+  &__nav {
+    display: flex;
+    gap: 20px;
 
+    a {
+      color: #ffffff;
+      text-decoration: none;
+      font-size: 15px;
+      padding: 10px 15px;
+      transition: background-color 0.3s ease, color 0.1s ease;
 
+      &:hover,
+      &.active {
+        background-color: v.$blue-light;
+        color: #282c34;
+        border-radius: 5px;
+      }
+    }
+  }
+}
