@@ -1101,6 +1101,16 @@ h3 {
   top: 20px;
   right: 20px;
 }
+.head__nav button {
+  color: white;
+  text-decoration: none;
+  font-size: 1em;
+  background: transparent;
+}
+.head__nav button:hover {
+  color: #ffcc00;
+  transform: scale(1.1);
+}
 .head__nav a {
   color: white;
   text-decoration: none;
@@ -1535,5 +1545,45 @@ h3 {
 }
 .payment .credit-card__submit:hover {
   background-color: #45a049;
+}
+
+.confirmation {
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px 40px;
+  text-align: center;
+}
+
+/* Heading Styles */
+.confirmation__heading {
+  font-size: 3.5rem;
+  color: #2c3e50;
+  margin-bottom: 20px;
+}
+
+/* Description Styles */
+.confirmation__description {
+  font-size: 2.5rem;
+  line-height: 1.5;
+  margin-bottom: 30px;
+  color: #555;
+}
+
+/* Button Styles */
+.btn-home {
+  display: inline-block;
+  padding: 12px 24px;
+  font-size: 2rem;
+  color: #fff;
+  background-color: #3498db;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.btn-home:hover {
+  background-color: #2980b9;
 }
 /*# sourceMappingURL=app.css.map */

@@ -63,4 +63,11 @@ class Courses extends ActiveRecord
         }
         return self::$alerts;
     }
+
+    public function getTeacher() {
+        if ($this->teacher_id) {
+            return Teachers::find($this->teacher_id);
+        }
+        return null;
+    }
 }

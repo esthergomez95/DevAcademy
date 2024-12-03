@@ -44,18 +44,21 @@
     position: absolute;
     top: 20px;
     right: 20px;
-  }
 
-  &__nav a {
+
+  a, button {
     color: white;
     text-decoration: none;
     font-size: 1em;
-  }
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
 
-  &__nav a:hover {
-    color: #ffcc00;
-    transform: scale(1.1);
-  }
+    &:hover {
+      color: #ffcc00;
+      transform: scale(1.1);
+    }
 }
 
   .nav{

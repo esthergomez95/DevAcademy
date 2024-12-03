@@ -27,10 +27,12 @@ $router->post('/register', [authController::class, 'register']);
 //Finish Registration
 $router->get('/finish-registration', [finishRegistrationController::class, 'index']);
 $router->post('/finish-registration', [finishRegistrationController::class, 'finishRegistration']);
+$router->get('/finish-registration', [finishRegistrationController::class, 'finishRegistration']);
 
 $router->get('/payment', [paymentController::class, 'index']);
 $router->post('/payment', [paymentController::class, 'processPayment']);
-$router->get('/payment/confirmation', [paymentController::class, 'confirmation']);
+$router->post('/confirmation', [paymentController::class, 'confirmation']);
+$router->get('/confirmation', [paymentController::class, 'confirmation']);
 
 // Formulario de forget mi password
 $router->get('/forget', [authController::class, 'forget']);
@@ -60,6 +62,13 @@ $router->post('/admin/courses/create', [coursesController::class, 'create']);
 $router->post('/admin/courses/edit', [coursesController::class, 'edit']);
 $router->get('/admin/courses/edit', [coursesController::class, 'edit']);
 $router->post('/admin/courses/delete', [coursesController::class, 'delete']);
+
+$router->get('/admin/users', [registersController::class, 'index']);
+$router->get('/admin/users/create', [registersController::class, 'create']);
+$router->post('/admin/users/create', [registersController::class, 'create']);
+$router->post('/admin/users/edit', [registersController::class, 'edit']);
+$router->get('/admin/users/edit', [registersController::class, 'edit']);
+$router->post('/admin/users/delete', [registersController::class, 'delete']);
 
 $router->get('/admin/registers', [registersController::class, 'index']);
 

@@ -5,7 +5,7 @@ namespace Model;
 class Teachers extends ActiveRecord{
 
     protected static $table = 'teachers';
-    protected static $columnsDB = ['id', 'created', 'name', 'surname', 'city', 'country', 'image', 'tags'];
+    protected static $columnsDB = ['id', 'created', 'name', 'surname', 'city', 'country', 'tags'];
     public function __construct($args = [])
     {
         $this->id = $args['id'] ?? null;
@@ -14,7 +14,6 @@ class Teachers extends ActiveRecord{
         $this->surname = $args['surname'] ?? '';
         $this->city = $args['city'] ?? '';
         $this->country = $args['country'] ?? '';
-        $this->image = $args['image'] ?? '';
         $this->tags = $args['tags'] ?? '';
     }
 
@@ -31,14 +30,13 @@ class Teachers extends ActiveRecord{
         if (!$this->country) {
             self::$alerts['error'][] = 'El campo País es obligatorio';
         }
-        if (!$this->image) {
-            self::$alerts['error'][] = 'El campo Imagen es obligatorio';
-        }
         if (!$this->tags) {
             self::$alerts['error'][] = 'El campo Tags es obligatorio';
         }
 
         return self::$alerts;
     }
+
+
 
 }

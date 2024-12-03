@@ -227,7 +227,7 @@ class authController {
         }
 
         $router->render('auth/confirm', [
-            'title' => 'Confirma tu cuenta DevWebcamp',
+            'title' => 'Confirma tu cuenta DevAcademy',
             'alerts' => User::getAlert()
         ]);
     }

@@ -11,25 +11,33 @@ use MVC\Router;
 ob_start();
 
 class finishRegistrationController{
-    public static function index(Router $router){
+    public static function index(Router $router) {
         session_start();
 
+        // Verifica si el usuario está logueado
         if (!isset($_SESSION['id'])) {
             header('Location: /login');
             return;
         }
 
         $user = User::find($_SESSION['id']);
+
+        // Verifica si ya completó el registro
+        if ($user->completed_registration) {
+            header('Location: /main'); // Redirige a la página principal
+            exit;
+        }
+
         $alerts = [];
 
+        // Renderiza la vista para finalizar el registro
         $router->render('register/finish-registration', [
-            'title' => 'Elige tu plan pra finalizar tu registro',
+            'title' => 'Elige tu plan para finalizar tu registro',
             'alerts' => $alerts
         ]);
     }
 
-    public static function finishRegistration(Router $router)
-    {
+    public static function finishRegistration(Router $router) {
         session_start();
 
         if (!isset($_SESSION['id'])) {
@@ -38,10 +46,17 @@ class finishRegistrationController{
         }
 
         $user = User::find($_SESSION['id']);
+
+        if ($user->completed_registration) {
+            header('Location: /main');
+            exit;
+        }
+
         $alerts = [];
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $plan_id = $_POST['plan'] ?? Plans::P_FREE;
+
             $user->completed_registration = 1;
             $user->save();
 
@@ -72,5 +87,4 @@ class finishRegistrationController{
             'user' => $user
         ]);
     }
-
 }

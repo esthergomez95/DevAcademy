@@ -4,7 +4,7 @@ namespace Model;
 
 class User extends ActiveRecord {
     protected static $table = 'users';
-    protected static $columnsDB = ['id', 'created', 'name', 'surname', 'email', 'password', 'confirmed', 'token', 'admin'];
+    protected static $columnsDB = ['id', 'created', 'name', 'surname', 'email', 'password', 'confirmed', 'token', 'admin', 'completed_registration'];
 
     public $id;
     public $created;
@@ -17,8 +17,10 @@ class User extends ActiveRecord {
     public $token;
     public $admin;
 
+    public $completed_registration;
     public $current_password;
     public $new_password;
+
 
     
     public function __construct($args = [])
@@ -31,6 +33,7 @@ class User extends ActiveRecord {
         $this->password = $args['password'] ?? '';
         $this->password2 = $args['password2'] ?? '';
         $this->confirmed = $args['confirmed'] ?? 0;
+        $this->completed_registration = $args['completed_registration'] ?? 1;
         $this->token = $args['token'] ?? '';
         $this->admin = $args['admin'] ?? '';
 

@@ -26,22 +26,6 @@ class teachersController {
             header('Location: /login');
         }
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            if (!empty($_FILES['image']['tmp_name'])) {
-                $imageDirectory = '../public/img/teachers';
-
-                if (!is_dir($imageDirectory)) {
-                    mkdir($imageDirectory, 0755, true);
-                }
-
-                $imageInfo = getimagesize($_FILES['image']['tmp_name']);
-                $extension = ($imageInfo['mime'] === 'image/png') ? '.png' : '.jpg';
-                $temporaryImageName = md5(uniqid(rand(), true)) . $extension;
-                move_uploaded_file($_FILES['image']['tmp_name'], $imageDirectory . '/' . $temporaryImageName);
-                $_POST['image'] = $temporaryImageName;
-
-                // Save and optimize the image
-                self::saveOptimizedImage($temporaryImageName, $_FILES['image']['tmp_name'], $extension, 800, 600, $imageDirectory);
-            }
 
             $teachers->synchronize($_POST);
             $alerts = $teachers->validate();
@@ -50,10 +34,7 @@ class teachersController {
                 $result = $teachers->save();
 
                 if ($result) {
-                    $finalImageName = 'teacher_' . $teachers->id . $extension;
-                    rename($imageDirectory . '/' . $temporaryImageName, $imageDirectory . '/' . $finalImageName);
-                    $teachers->image = $finalImageName;
-                    $teachers->save(); // Guarda el nombre final de la imagen en la base de datos
+                    $teachers->save();
 
                     header('Location: /admin/teachers');
                     exit();
@@ -88,27 +69,7 @@ class teachersController {
             exit();
         }
 
-        $teachers->currentImage = $teachers->image;
-
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            if (!empty($_FILES['image']['tmp_name'])) {
-                $imageDirectory = '../public/img/teachers';
-
-                if (!is_dir($imageDirectory)) {
-                    mkdir($imageDirectory, 0755, true);
-                }
-
-                $imageInfo = getimagesize($_FILES['image']['tmp_name']);
-                $extension = ($imageInfo['mime'] === 'image/png') ? '.png' : '.jpg';
-                $imageName = md5(uniqid(rand(), true)) . $extension;
-                $_POST['image'] = $imageName;
-
-                // Save and optimize the image
-                self::saveOptimizedImage($imageName, $_FILES['image']['tmp_name'], $extension, 800, 600, $imageDirectory);
-            } else {
-                $_POST['image'] = $teachers->currentImage;
-            }
-
             $teachers->synchronize($_POST);
             $alerts = $teachers->validate();
 
@@ -130,30 +91,6 @@ class teachersController {
         ]);
     }
 
-    private static function saveOptimizedImage($imageName, $tmpName, $extension, $newWidth, $newHeight, $imageDirectory) {
-        move_uploaded_file($tmpName, $imageDirectory . '/' . $imageName);
-
-        if ($extension === '.png') {
-            $editedImage = imagecreatefrompng($imageDirectory . '/' . $imageName);
-        } else {
-            $editedImage = imagecreatefromjpeg($imageDirectory . '/' . $imageName);
-        }
-
-        $width = imagesx($editedImage);
-        $height = imagesy($editedImage);
-
-        $destination = imagecreatetruecolor($newWidth, $newHeight);
-        imagecopyresampled($destination, $editedImage, 0, 0, 0, 0, $newWidth, $newHeight, $width, $height);
-
-        if ($extension === '.png') {
-            imagepng($destination, $imageDirectory . '/' . $imageName);
-        } else {
-            imagejpeg($destination, $imageDirectory . '/' . $imageName);
-        }
-
-        imagedestroy($editedImage);
-        imagedestroy($destination);
-    }
 
     public static function delete(){
         if(!is_admin()){

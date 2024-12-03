@@ -13,12 +13,13 @@
     }
 
     function current_page($path){
+
         return str_contains( $_SERVER['PATH_INFO'], $path);
     }
 
     function is_authenticated() :bool{
         session_start();
-        return isset($_SESSION['name']) && !empty($_SESSION);
+        return !empty($_SESSION['name']) && !empty($_SESSION);
     }
 
     function is_admin(): bool{

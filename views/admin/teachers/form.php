@@ -18,24 +18,6 @@
         <input type="text" class="form__input" id="country" name="country" placeholder="Introduce tu pais" value="<?php echo $teachers->country ?? ''; ?>">
     </div>
 
-    <div class="form__field">
-        <label for="image" class="form__label">Imagen</label>
-        <input type="file" class="form__input form__input--file" id="image" name="image">
-    </div>
-
-    <?php if (isset($teachers->image)) { ?>
-        <p class="form__text">Current Image:</p>
-        <div class="form__image">
-            <picture>
-                <?php
-                $imagePath = $_ENV['HOST'] . '/img/teachers/' . $teachers->image;
-                $imageExtension = pathinfo($teachers->image, PATHINFO_EXTENSION);
-                ?>
-                <source srcset="<?php echo $imagePath; ?>" type="image/<?php echo $imageExtension; ?>">
-                <img src="<?php echo $imagePath; ?>" alt="Teacher Image">
-            </picture>
-        </div>
-    <?php } ?>
 </fieldset>
 <fieldset class="form__fieldset">
     <legend class="form__legend">Información complementaria</legend>

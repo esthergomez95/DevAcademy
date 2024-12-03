@@ -41,7 +41,6 @@
             <?php if (!empty($courses)): ?>
                 <?php foreach ($courses as $course): ?>
                     <div class="swiper-slide course-card">
-                        <img src="/public/img/teachers/<?= s($course->teacher->image); ?>" alt="Imagen de <?= s($course->teacher->name); ?>" class="course-card__image">
                         <div class="course-card__info">
                             <h4 class="course-card__title"><?= s($course->name); ?></h4>
                             <p class="course-card__description"><?= s($course->description); ?></p>

@@ -9,13 +9,14 @@ use MVC\Router;
 class coursesController{
 
     public static function index(Router $router){
-        $courses = Courses::all();
         if (!is_admin()) {
             header('Location: /login');
             exit();
         }
-
-
+        $courses = Courses::all();
+        foreach ($courses as $course) {
+            $course->teacher = $course->getTeacher();
+        }
         $router->render('admin/courses/index', [
             'title' => 'Cursos',
             'courses' => $courses,
@@ -122,8 +123,6 @@ class coursesController{
             if ($result) {
                 header('Location: /admin/courses');
                 exit();
-            } else {
-                $alerts['error'][] = 'Error al eliminar el curso.';
             }
         }
 

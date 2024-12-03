@@ -37,6 +37,7 @@ class paymentController
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $user = User::find($_SESSION['id']);
+            $user->completed_registration = 1;
             $register = Registers::where('user_id', $_SESSION['id']);
 
             $register->plan_id = '2';
@@ -45,6 +46,7 @@ class paymentController
             $register->token = bin2hex(random_bytes(16));
 
             $register->save();
+            $user->save();
 
             header('Location: /confirmation');
             exit;
@@ -57,14 +59,11 @@ class paymentController
     public static function confirmation(Router $router)
     {
         session_start();
-        if (!isset($_SESSION['id'])) {
-            header('Location: /login');
-            exit;
-        }
+
         $user = User::find($_SESSION['id']);
         $register = Registers::where('user_id', $_SESSION['id']);
 
-        $router->render('/register/payment/confirmation', [
+        $router->render('register/confirmation', [
             'title' => 'Confirmación de Pago',
             'user' => $user,
             'register' => $register
