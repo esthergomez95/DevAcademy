@@ -2,6 +2,7 @@
 
 require_once __DIR__ . '/../includes/app.php';
 
+use Controllers\categoriesController;
 use Controllers\coursesController;
 use Controllers\dashboardController;
 use Controllers\finishRegistrationController;
@@ -70,6 +71,13 @@ $router->post('/admin/users/edit', [registersController::class, 'edit']);
 $router->get('/admin/users/edit', [registersController::class, 'edit']);
 $router->post('/admin/users/delete', [registersController::class, 'delete']);
 
+$router->get('/admin/categories', [categoriesController::class, 'index']);
+$router->get('/admin/categories/create', [categoriesController::class, 'create']);
+$router->post('/admin/categories/create', [categoriesController::class, 'create']);
+$router->post('/admin/categories/edit', [categoriesController::class, 'edit']);
+$router->get('/admin/categories/edit', [categoriesController::class, 'edit']);
+$router->post('/admin/categories/delete', [categoriesController::class, 'delete']);
+
 $router->get('/admin/registers', [registersController::class, 'index']);
 
 //Area  Publica
@@ -78,5 +86,7 @@ $router->get('/about', [pagesController::class, 'about']);
 $router->get('/courses', [pagesController::class, 'courses']);
 $router->get('/plans', [pagesController::class, 'plans']);
 $router->get('/main', [pagesController::class, 'main']);
+$router->get('/preview', [pagesController::class, 'preview']);
+
 
 $router->checkRoutes();

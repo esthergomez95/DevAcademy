@@ -52,8 +52,8 @@ class Courses extends ActiveRecord
         if (!$this->requirements) {
             self::$alerts['error'][] = 'Los Resultados de Aprendizaje son obligatorios';
         }
-        if ($this->price <= 0 || !filter_var($this->price, FILTER_VALIDATE_FLOAT)) {
-            self::$alerts['error'][] = 'El Precio debe ser un número mayor a cero';
+        if (!is_numeric($this->price) || $this->price < 0) {
+            self::$alerts['error'][] = 'El Precio no puede ser un número negativo';
         }
         if (!$this->category_id || !filter_var($this->category_id, FILTER_VALIDATE_INT)) {
             self::$alerts['error'][] = 'Selecciona una Categoría válida';

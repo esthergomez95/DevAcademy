@@ -15,7 +15,14 @@
         <label for="email" class="form__label">Email</label>
         <input type="email" class="form__input" id="email" name="email" placeholder="Introduce el correo electrónico" value="<?= $user->email ?? ''; ?>">
     </div>
-
+    <div class="form__field">
+        <label class="form__label" for="password">Contraseña</label>
+        <input class="form__input" type="password" placeholder="Introduce tu contraseña" id="password" name="password">
+    </div>
+    <div class="form__field">
+        <label class="form__label" for="password2">Repite tu contraseña</label>
+        <input class="form__input" type="password" placeholder="Introduce tu contraseña" id="password2" name="password2">
+    </div>
     <div class="form__field">
         <label for="admin" class="form__label">Rol de Administrador</label>
         <select class="form__select" id="admin" name="admin">

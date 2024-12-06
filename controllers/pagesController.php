@@ -65,5 +65,27 @@ class pagesController{
             'title' => 'Nuestros planes'
         ]);
     }
+
+    public static function preview(Router $router) {
+        $id = $_GET['id'] ?? null;
+
+        if (!$id) {
+            header('Location: /courses');
+            exit();
+        }
+
+        $course = Courses::find($id);
+
+        if (!$course) {
+            header('Location: /courses');
+            exit();
+        }
+
+        $router->render('pages/preview', [
+            'title' => 'Previsualización del Curso',
+            'course' => $course
+        ]);
+
+    }
 }
 

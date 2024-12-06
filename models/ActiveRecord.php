@@ -216,4 +216,11 @@ class ActiveRecord {
         static::$filters = [];
         return $result;
     }
+
+    public static function count() {
+        $query = "SELECT COUNT(*) AS count FROM " . static::$table;
+        $result = self::$db->query($query);
+        $data = $result->fetch_assoc();
+        return $data['count'] ?? 0;
+    }
 }

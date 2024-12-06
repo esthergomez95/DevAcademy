@@ -68,8 +68,8 @@ class User extends ActiveRecord {
         if (empty($this->password)) {
             self::$alerts['error'][] = 'La contraseña no puede estar vacía.';
         }
-        if (strlen($this->password) < 6) {
-            self::$alerts['error'][] = 'La contraseña debe tener al menos 6 caracteres.';
+        if (!$this->password || strlen($this->password) < 6) {
+            self::$alerts['error'][] = 'La contraseña debe tener al menos 6 caracteres';
         }
         if ($this->password !== $this->password2) {
             self::$alerts['error'][] = 'Las contraseñas no coinciden.';

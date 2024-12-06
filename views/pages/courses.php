@@ -46,6 +46,8 @@
                             <p class="course-card__description"><?= s($course->description); ?></p>
                             <p class="course-card__price"><?= s($course->price); ?> €</p>
                             <p class="course-card__teacher"><?= s($course->teacher->name . ' ' . $course->teacher->surname); ?></p>
+                            <a href="/preview?id=<?= s($course->id); ?>" class="course-card__preview-button">Previsualizar</a>
+
                         </div>
                     </div>
                 <?php endforeach; ?>

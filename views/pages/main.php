@@ -21,8 +21,7 @@
                     <span>- Laura García</span>
                 </div>
                 <div class="testimonial">
-                    <p>"Los cursos están muy bien estructurados, son claros y directos, ideales para aprender rápido."</p>
-                    <span>- Laura García</span>
+                    <p>"Aprender con estos cursos ha sido muy fácil gracias a la forma en que presentan los temas, con explicaciones sencillas y ejemplos prácticos."</p>                    <span>- Monica Gomez</span>
                 </div>
             </div>
         </div>

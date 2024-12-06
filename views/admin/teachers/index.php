@@ -3,7 +3,7 @@
 <div class="dashboard__container-button">
     <a href="/admin/teachers/create" class="dashboard__button">
        <i class = "fa-solid fa-circle-plus"></i>
-       Crear Profesor
+       Añadir Profesor
     </a>
 </div>
 

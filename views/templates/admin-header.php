@@ -2,7 +2,7 @@
     <div class = "dashboard__header--container">
             <a href="/">
                 <div class = "dashboard__header--logo">
-                    <img src = "../build/img/logo.png" alt = "logo">
+                    <img src="/build/img/logo.png" alt="logo">
                 </div>
             </a>
 

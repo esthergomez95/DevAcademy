@@ -15,3 +15,18 @@ radioButtons.forEach(radio => {
         }
     });
 });
+
+window.handlePlanSelection = function (e) {
+    e.preventDefault();
+
+    const isFree = document.getElementById('gratis').checked;
+    const isPremium = document.getElementById('premium').checked;
+
+    if (isFree) {
+        window.location.href = '/main';
+    } else if (isPremium) {
+        window.location.href = '/payment';
+    }
+};
+
+

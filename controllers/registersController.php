@@ -34,6 +34,8 @@ class registersController {
                 'name' => $_POST['name'] ?? '',
                 'surname' => $_POST['surname'] ?? '',
                 'email' => $_POST['email'] ?? '',
+                'password' => $_POST['password'] ?? '',
+                'password2' => $_POST['password2'] ?? '',
                 'admin' => $_POST['admin'] ?? 0
             ];
             $user->synchronize($data);

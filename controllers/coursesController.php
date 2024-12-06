@@ -38,7 +38,7 @@ class coursesController{
             $courses->synchronize($_POST);
             $alerts = $courses->validate();
 
-            if (empty($alerts)) {
+            if (empty($alerts['error'])) {
                 $result = $courses->save();
                 if ($result['result']) {
                     header('Location: /admin/courses');
@@ -102,8 +102,9 @@ class coursesController{
         ]);
     }
 
-    public static function delete(){
-        if(!is_admin()){
+    public static function delete()
+    {
+        if (!is_admin()) {
             header('Location: /login');
             exit();
         }
@@ -115,7 +116,7 @@ class coursesController{
                 exit();
             }
             $courses = Courses::find($id);
-            if(!isset($courses)) {
+            if (!isset($courses)) {
                 header('Location: /admin/courses');
                 exit();
             }
@@ -125,6 +126,6 @@ class coursesController{
                 exit();
             }
         }
-
     }
+
 }

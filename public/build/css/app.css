@@ -322,6 +322,7 @@ body {
 
 a {
   text-decoration: none;
+  cursor: pointer;
 }
 
 img {
@@ -609,6 +610,20 @@ h3 {
   font-size: 14px;
   color: #666;
 }
+.course-card__preview-button {
+  display: inline-block;
+  margin-top: 1rem;
+  padding: 0.5rem 1rem;
+  background-color: #1D3557;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 5px;
+  font-size: 1.3rem;
+  transition: background-color 0.3s ease;
+}
+.course-card__preview-button:hover {
+  background-color: #457B9D;
+}
 
 .course-filter {
   margin-bottom: 20px;
@@ -883,6 +898,53 @@ h3 {
     font-size: 1rem;
   }
 }
+.course-preview {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem;
+}
+.course-preview__video {
+  width: 100%;
+  max-width: 800px;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+.course-preview__video-player {
+  position: relative;
+  background-color: #000;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+.course-preview__video-player video {
+  width: 100%;
+  border-radius: 10px;
+}
+.course-preview__video-title {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  color: #1D3557;
+}
+.course-preview__actions {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+.course-preview__actions a {
+  padding: 0.8rem 1.5rem;
+  text-decoration: none;
+  border-radius: 5px;
+  color: #fff;
+  font-size: 2rem;
+  background-color: #1D3557;
+  margin: 2rem;
+}
+.course-preview__actions a:hover {
+  background-color: #457B9D;
+}
+
 .form {
   width: 600px;
   margin: 30px auto;
@@ -1257,8 +1319,13 @@ h3 {
   flex-direction: column;
 }
 .dashboard__header {
+  height: 7rem;
   background-color: #457B9D;
   padding: 1rem;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
 }
 .dashboard__header--container {
   display: flex;
@@ -1285,10 +1352,12 @@ h3 {
   margin: 0 auto;
 }
 .dashboard__sidebar {
-  background-color: #6f6f69;
-  width: 12rem;
   position: fixed;
-  height: 100vh;
+  top: 7rem;
+  height: calc(100vh - 7rem);
+  width: 12rem;
+  background-color: #6f6f69;
+  overflow-y: auto;
 }
 .dashboard__link {
   color: white;
@@ -1299,7 +1368,7 @@ h3 {
   transition: 300ms background-color ease-in-out, 300ms color ease, 300ms border-radius ease;
 }
 .dashboard__link:hover, .dashboard__link--active {
-  background-color: #f1f9f9;
+  background-color: #81acc7;
   color: #000000;
 }
 .dashboard__icon {
@@ -1312,9 +1381,10 @@ h3 {
 }
 .dashboard__content {
   margin-left: 12rem;
+  margin-top: 4rem;
+  padding: 1rem;
   width: calc(100% - 12rem);
-  padding: 1rem 1rem 3rem 1rem;
-  overflow-y: scroll;
+  overflow-y: auto;
 }
 @media (min-width: 768px) {
   .dashboard__content {
@@ -1344,6 +1414,70 @@ h3 {
 }
 .dashboard__button i {
   margin-right: 8px;
+}
+.dashboard__stats {
+  display: flex;
+  justify-content: space-between;
+  gap: 1.5rem;
+  margin: 0 auto 3rem;
+  max-width: 1200px;
+}
+@media (min-width: 768px) {
+  .dashboard__stats {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+}
+.dashboard__stats-item {
+  background-color: white;
+  border-radius: 12px;
+  padding: 1.5rem 2rem;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  flex: 1;
+  max-width: 250px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.dashboard__stats-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.2);
+}
+.dashboard__stats-item-title {
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: #457B9D;
+  margin-bottom: 0.5rem;
+}
+.dashboard__stats-item-value {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #1D3557;
+  text-align: center;
+}
+.dashboard__quick-actions {
+  text-align: center;
+}
+.dashboard__quick-actions-title {
+  font-size: 2rem;
+  font-weight: 500;
+  color: #1D3557;
+  margin-bottom: 1rem;
+}
+.dashboard__quick-actions .dashboard__button {
+  display: inline-block;
+  margin: 0.5rem;
+  padding: 12px 24px;
+  font-size: 2rem;
+  background: linear-gradient(145deg, #457B9D, #1D3557);
+  color: #fff;
+  text-decoration: none;
+  border-radius: 25px;
+  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.2), -3px -3px 5px rgba(255, 255, 255, 0.1);
+  transition: background 0.3s ease, transform 0.3s ease;
+}
+.dashboard__quick-actions .dashboard__button:hover {
+  background: linear-gradient(145deg, #1D3557, #457B9D);
+  transform: scale(1.05);
 }
 
 .table {

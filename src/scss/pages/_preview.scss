@@ -1,0 +1,53 @@
+.course-preview {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem;
+
+  &__video {
+    width: 100%;
+    max-width: 800px;
+    margin-bottom: 2rem;
+    text-align: center;
+
+    &-player {
+      position: relative;
+      background-color: #000;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+
+      video {
+        width: 100%;
+        border-radius: 10px;
+      }
+    }
+
+    &-title {
+      font-size: 2rem;
+      font-weight: bold;
+      margin-bottom: 1rem;
+      color: #1D3557;
+    }
+  }
+
+  &__actions {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+
+    a {
+      padding: 0.8rem 1.5rem;
+      text-decoration: none;
+      border-radius: 5px;
+      color: #fff;
+      font-size: 2rem;
+      background-color: #1D3557;
+      margin: 2rem;
+
+      &:hover {
+        background-color: #457B9D;
+      }
+    }
+  }
+}

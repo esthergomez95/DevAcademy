@@ -1,7 +1,7 @@
 <main class="plan">
     <p class="plan__description">Elige el plan de DevAcademy que más se ajuste a tus necesidades y comienza a aprender hoy mismo!</p>
 
-    <form method="POST" action="/finish-registration">
+    <form method="POST" action="#">
         <div class="toggle__container-wrapper">
             <div class="toggle__container">
                 <input type="radio" id="gratis" name="plan" value="1" checked>
@@ -21,12 +21,11 @@
                     <li class="plan__item">Calidad de video limitada (Definición Estándar)</li>
                     <li class="plan__item">Foros de soporte comunitario</li>
                     <li class="plan__item">Acceso a webinarios introductorios</li>
-
                 </ul>
                 <p class="plan__price">0€</p>
             </div>
 
-            <div class="plan plan--premium">
+            <div class="plan plan--premium" style="display: none;">
                 <h3 class="plan__name">Plan Premium</h3>
                 <ul class="plan__list">
                     <li class="plan__item">Acceso ilimitado a todos los cursos</li>
@@ -37,7 +36,6 @@
                 <p class="plan__price">25€</p>
             </div>
         </div>
-
-        <a href="/payment" class="btn-confirm">Confirmar Plan</a>
+        <a href="#" class="btn-confirm" onclick="handlePlanSelection(event)">Confirmar Plan</a>
     </form>
 </main>

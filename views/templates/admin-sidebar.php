@@ -25,5 +25,11 @@
                 Registrados
             </span>
         </a>
+        <a href="/admin/categories" class="dashboard__link <?php echo current_page('/categories') ? 'dashboard__link--active' : '' ?>">
+            <i class="fa-solid fa-folder-open dashboard__icon"></i>
+            <span class = "dashboard__nav-text">
+                Categorias
+            </span>
+        </a>
     </nav>
 </aside>
